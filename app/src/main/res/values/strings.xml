@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">ComPass_NavigateYourCompany</string>
+    <string name="app_name">ComPass</string>
+    <string name="title_activity_sign_up_employer">sign_up_employer_Activity</string>
+    <string name="title_activity_home_employee">home_employee_Activity</string>
+    <string-array name="type_options">
+        <item>type1</item>
+        <item>type2</item>
+        <item>type3</item>
+    </string-array>
 </resources>
