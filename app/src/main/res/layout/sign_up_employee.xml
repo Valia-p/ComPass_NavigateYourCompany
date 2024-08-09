@@ -101,7 +101,26 @@
             android:padding="10dp"
             android:layout_marginTop="8dp" />
 
-        <!-- να μπει και bio-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_UploadFile"
+            android:text="Upload CV"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:layout_marginTop="8dp"/>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_upload"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_cv"
+            android:contentDescription="Upload CV"
+            android:background="@drawable/input_bg"/>
+
         <Button
             android:id="@+id/signUp_button"
             android:layout_width="match_parent"
