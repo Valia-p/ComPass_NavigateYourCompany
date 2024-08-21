@@ -14,11 +14,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//for file uploading
+import android.net.Uri;
+import android.content.Intent;
+import android.database.Cursor;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
 
 // SHOULD CHECK ON HOW TO UPLOAD A FILE FROM EXTERNAL STORAGE
 
 public class signup_employee_Activity extends AppCompatActivity {
+
+    //for file uploading
+    private static final int PICK_FILE = 100;
+    private Uri selectedFileUri;
+    private String selectedFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +47,14 @@ public class signup_employee_Activity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish(); }
+        });
+
+        //for file uploading
+        cvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFiles();
+            }
         });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -111,22 +134,80 @@ public class signup_employee_Activity extends AppCompatActivity {
                 }
                 departmentText.setText(spannableString7);
 
+                // for file uploading
+                if (selectedFileUri != null) {
+                    uploadFile(selectedFilePath);
+                }
+//                else {
+//                    Toast.makeText(signup_employee_Activity.this, "Please select your CV file", Toast.LENGTH_SHORT).show();
+//                }
+
                 if (name.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty() || authToken.isEmpty() || experience.isEmpty() || department.isEmpty()) {
                     Toast.makeText(signup_employee_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     //successful sign up
-                    //clearForm();
+                    nameEditText.setText("");
+                    passwordEditText.setText("");
+                    emailEditText.setText("");
+                    phoneEditText.setText("");
+                    authTokenEditText.setText("");
+                    departmentSpinner.setSelection(0);
+                    experienceEditText.setText("");
                     Toast.makeText(signup_employee_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(signup_employee_Activity.this, home_employee_Activity.class);
+                    // if i want to pass extra data: intent.putExtra("username", name);
+                    // in home_employee: String username = getIntent().getStringExtra("username");
+                    startActivity(intent);
+                    finish();
+
                 }
             }
         });
     }
-//    private void clearForm() {
-//        nameEditText.setText("");
-//        passwordEditText.setText("");
-//        emailEditText.setText("");
-//        phoneEditText.setText("");
-//        authTokenEditText.setText("");
-//        departmentSpinner.setSelection(0);
-//    }
+
+    // for file uploading - open Files to pick a file
+    private void openFiles() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        startActivityForResult(intent, PICK_FILE);
+    }
+
+    @Override // handle the result of file selection
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == PICK_FILE) {
+            if (data != null) {
+                selectedFileUri = data.getData();
+                selectedFilePath = getPathFromUri(selectedFileUri);
+            }
+        }
+    }
+
+    // convert the uri to a file path
+    private String getPathFromUri(Uri uri) {
+        String[] projection = { MediaStore.MediaColumns.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            cursor.moveToFirst();
+            String path = cursor.getString(columnIndex);
+            cursor.close();
+            return path;
+        }
+        return null;
+    }
+
+    // method to upload the file
+    private void uploadFile(String filepath) {
+        File file = new File(filepath);
+        if (file.exists()) {
+            // placeholder for actual file upload logic
+            Toast.makeText(this, "File ready for upload: " + filepath, Toast.LENGTH_SHORT).show();
+            Log.d("signup_employee_Activity", "File path: " + filepath);
+        }
+        else {
+            Toast.makeText(this, "File not found", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
