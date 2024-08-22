@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/fade_bg">
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ComPass"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- Horizontal line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/profile_bg_color"
+        android:layout_marginTop="60dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:elevation="4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/headName_text"
+            android:text="Head Name"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Years"
+                android:id="@+id/years"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/employees"
+                android:text="@string/employees"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/yearsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Years"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emps"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"/>
+        </RelativeLayout>
+
+        <!-- MORE CONTENTS -->
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/profile_bg_color"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="640dp"/>
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="7dp"
+        android:background="@drawable/circular_bg">
+        <ImageView
+            android:id="@+id/settings_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_settings"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/circular_bg">
+        <ImageView
+            android:id="@+id/home_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_home"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/circular_bg">
+        <ImageView
+            android:id="@+id/logout_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_logout"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"/>
+    </FrameLayout>
+
+</RelativeLayout>

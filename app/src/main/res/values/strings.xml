@@ -7,4 +7,6 @@
         <item>type2</item>
         <item>type3</item>
     </string-array>
+    <string name="Years"><u>Years</u></string>
+    <string name="employees"><u>Employees</u></string>
 </resources>
