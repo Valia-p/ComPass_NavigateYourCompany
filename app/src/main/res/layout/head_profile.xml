@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:text="Supervisor"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
             android:paddingStart="8dp"
@@ -151,13 +151,67 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info"
-            android:text="Information"
+            android:text="@string/Information"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             android:paddingStart="8dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="20dp"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail:"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingTop="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                android:text="something@something.com"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingTop="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginStart="60dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingTop="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone"
+                android:text="123456789"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingTop="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginStart="130dp"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
