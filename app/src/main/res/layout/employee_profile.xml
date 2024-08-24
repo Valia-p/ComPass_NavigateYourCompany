@@ -36,8 +36,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/headName"
-            android:text="Head Name"
+            android:id="@+id/EmployeeName"
+            android:text="Employee Name"
             android:textSize="30sp"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -66,11 +66,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/employees"
+                    android:text="@string/Leaves"
                     android:textSize="20dp"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"/>
             </RelativeLayout>
 
             <FrameLayout
@@ -105,10 +106,10 @@
                     android:layout_alignParentStart="true"/>
 
                 <TextView
-                    android:id="@id/emps"
+                    android:id="@+id/leaves"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Emps"
+                    android:text="leaves"
                     android:textSize="20sp"
                     android:textColor="@android:color/black"
                     android:layout_alignParentEnd="true"
@@ -126,7 +127,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Supervisor"
+            android:text="Employee"
             android:textStyle="bold"
             android:textSize="23sp"
             android:textColor="@android:color/black"
@@ -138,7 +139,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/department"
+            android:id="@+id/department_Text"
             android:text="department"
             android:textSize="18sp"
             android:textColor="@android:color/black"
