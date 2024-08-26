@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="?android:attr/windowBackground">
+    android:background="@drawable/fade_bg_blue">
 
     <Button
         android:id="@+id/back_button"
@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/bg_color2"/>
 
     <TextView
         android:id="@+id/title"
@@ -52,7 +53,8 @@
             android:layout_marginEnd="8dp"
             android:minWidth="100dp"
             android:minHeight="48dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/bg_color2"/>
 
         <Button
             android:id="@+id/cancel_button"
@@ -61,7 +63,8 @@
             android:text="Cancel"
             android:minWidth="100dp"
             android:minHeight="48dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/bg_color2"/>
     </LinearLayout>
 
     <ListView
@@ -85,6 +88,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:minWidth="200dp"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:backgroundTint="@color/bg_color2"/>
 
 </RelativeLayout>

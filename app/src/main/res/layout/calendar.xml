@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/windowBackground"
+    android:background="@drawable/fade_bg_blue"
     android:padding="16dp">
 
     <!-- App Name -->
@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Profile" />
+        android:text="Profile"
+        android:backgroundTint="@color/bg_color2"/>
 
     <!-- Calendar View -->
     <CalendarView

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/fade_bg_blue">
 
     <!-- change the color of the * in the .java-->
     <LinearLayout
@@ -16,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginBottom="16dp"
-            android:text="Back" />
+            android:text="Back"
+            android:backgroundTint="@color/bg_color2"/>
 
         <TextView
             android:id="@+id/title"
@@ -99,7 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:padding="10dp"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:backgroundTint="@color/bg_color2"/>
 
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/fade_bg">
+    android:background="@drawable/fade_bg_blue">
 
     <TextView
         android:id="@+id/app_name"
@@ -23,7 +23,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/profile_bg_color"
+        android:background="@color/bg_color2"
         android:layout_marginTop="60dp" />
 
     <LinearLayout
@@ -120,7 +120,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/profile_bg_color"
+            android:background="@color/bg_color2"
             android:layout_marginTop="30dp"/>
 
         <TextView
@@ -215,7 +215,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/profile_bg_color"
+        android:background="@color/bg_color2"
         android:layout_marginBottom="60dp"
         android:layout_marginTop="640dp"/>
 

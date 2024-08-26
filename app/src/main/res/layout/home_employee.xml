@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="?android:attr/windowBackground">
+    android:background="@drawable/fade_bg_blue">
 
     <!-- App Name -->
     <TextView
@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:text="Profile"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/bg_color2"/>
 
     <!-- Calendar View -->
     <CalendarView
@@ -94,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select Document Image"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/bg_color2"/>
 
         <!-- Clear and Submit Buttons -->
         <LinearLayout
@@ -110,7 +112,8 @@
                 android:layout_marginEnd="8dp"
                 android:minWidth="100dp"
                 android:minHeight="48dp"
-                android:text="Clear" />
+                android:text="Clear"
+                android:backgroundTint="@color/bg_color2"/>
 
             <Button
                 android:id="@+id/submit_button"
@@ -118,7 +121,8 @@
                 android:layout_height="wrap_content"
                 android:minWidth="100dp"
                 android:minHeight="48dp"
-                android:text="Submit" />
+                android:text="Submit"
+                android:backgroundTint="@color/bg_color2"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

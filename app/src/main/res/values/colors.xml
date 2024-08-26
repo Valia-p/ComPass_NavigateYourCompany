@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="profile_bg_color">#7851A9</color>
     <color name="bg_color">#c2b5d1</color>
+    <color name="bg_color1">#091E28</color>
+    <color name="bg_color2">#003549</color>
+    <color name="bg_color3">#9AAEBB</color>
+    <color name="bg_color4">#5B99C2</color>
 </resources>

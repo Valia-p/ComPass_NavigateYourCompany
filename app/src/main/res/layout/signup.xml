@@ -5,7 +5,7 @@
     android:id="@+id/ActivityLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_secondary70"
+    android:background="@drawable/fade_bg"
     tools:context=".SignUpActivity">
 
     <EditText
@@ -68,6 +68,7 @@
         android:textColor="#000000"
         android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Signup" />
 
@@ -98,7 +99,7 @@
         android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@drawable/button_pg"
+        android:backgroundTint="@color/bg_color2"
         android:text="LOGIN"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textUsername"
