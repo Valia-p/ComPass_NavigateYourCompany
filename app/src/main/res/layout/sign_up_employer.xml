@@ -34,7 +34,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Username *"
             android:inputType="textPersonName"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -43,7 +43,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Password *"
             android:inputType="textPassword"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -52,7 +52,7 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Email *"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -61,7 +61,7 @@
             android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Company"
+            android:hint="Company *"
             android:inputType="text"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -70,7 +70,7 @@
             android:id="@+id/auth_token"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Create auth token"
+            android:hint="Create auth token *"
             android:inputType="text"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -79,7 +79,7 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address"
+            android:hint="Address *"
             android:inputType="textPostalAddress"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>
@@ -88,7 +88,7 @@
             android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone"
+            android:hint="Phone *"
             android:inputType="phone"
             android:padding="10dp"
             android:layout_marginTop="8dp"/>

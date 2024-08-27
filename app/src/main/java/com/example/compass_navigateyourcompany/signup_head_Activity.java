@@ -1,5 +1,6 @@
 package com.example.compass_navigateyourcompany;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -106,6 +107,9 @@ public class signup_head_Activity extends AppCompatActivity {
                     //successful sign up
                     //clearForm();
                     Toast.makeText(signup_head_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(signup_head_Activity.this, home_head_Activity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

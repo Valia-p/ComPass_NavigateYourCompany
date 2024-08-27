@@ -1,6 +1,7 @@
 package com.example.compass_navigateyourcompany;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -108,6 +109,15 @@ public class home_employee_Activity extends AppCompatActivity {
                     // Assume submit is successful
                     Toast.makeText(home_employee_Activity.this, "Submit Successful", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home_employee_Activity.this, employee_profile_Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

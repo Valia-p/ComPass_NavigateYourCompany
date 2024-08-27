@@ -146,13 +146,13 @@ public class signup_employee_Activity extends AppCompatActivity {
                     Toast.makeText(signup_employee_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     //successful sign up
-                    nameEditText.setText("");
-                    passwordEditText.setText("");
-                    emailEditText.setText("");
-                    phoneEditText.setText("");
-                    authTokenEditText.setText("");
-                    departmentSpinner.setSelection(0);
-                    experienceEditText.setText("");
+//                    nameEditText.setText(""); DO WE NEED IT???
+//                    passwordEditText.setText("");
+//                    emailEditText.setText("");
+//                    phoneEditText.setText("");
+//                    authTokenEditText.setText("");
+//                    departmentSpinner.setSelection(0);
+//                    experienceEditText.setText("");
                     Toast.makeText(signup_employee_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(signup_employee_Activity.this, home_employee_Activity.class);
                     // if i want to pass extra data: intent.putExtra("username", name);
