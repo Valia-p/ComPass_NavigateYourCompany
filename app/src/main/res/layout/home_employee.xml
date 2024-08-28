@@ -1,128 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
     <!-- App Name -->
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your App Name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
-    <!-- Profile Button -->
-    <Button
-        android:id="@+id/profile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/bg_color2"/>
-
-    <!-- Calendar View -->
-    <CalendarView
-        android:id="@+id/calendar_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_name"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ComPass"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"/>
 
-    <TextView
-        android:id="@+id/request_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Request"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/calendar_view"
-        android:layout_marginTop="24dp"
-        android:layout_centerHorizontal="true" />
+        <!-- Profile Button -->
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/circular_bg">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/profile_button"
+                android:src="@drawable/ic_user_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"/>
+        </FrameLayout>
 
-    <!-- Request Form Fields -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/request_title"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp">
-
-        <!-- Type  -->
-        <Spinner
-            android:id="@+id/type_spinner"
+        <!-- Calendar View -->
+        <CalendarView
+            android:id="@+id/calendar_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            android:layout_below="@id/app_name"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true" />
 
-        <!-- From -->
-        <EditText
-            android:id="@+id/from_date"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/request_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="From Date"
-            android:focusable="false"
-            android:layout_marginBottom="8dp"
-            android:inputType="none"
-            android:background="@android:drawable/edit_text" />
+            android:text="Request"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/calendar_view"
+            android:layout_marginTop="24dp"
+            android:layout_centerHorizontal="true" />
 
-        <!-- To -->
-        <EditText
-            android:id="@+id/to_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="To Date"
-            android:focusable="false"
-            android:layout_marginBottom="8dp"
-            android:inputType="none"
-            android:background="@android:drawable/edit_text" />
-
-        <!-- Document -->
-        <Button
-            android:id="@+id/select_image_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Document Image"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/bg_color2"/>
-
-        <!-- Clear and Submit Buttons -->
+        <!-- Request Form Fields -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:layout_below="@id/request_title"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@android:color/white"
+            android:elevation="4dp">
 
-            <Button
-                android:id="@+id/clear_button"
-                android:layout_width="wrap_content"
+            <!-- Type  -->
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:minWidth="100dp"
-                android:minHeight="48dp"
-                android:text="Clear"
+                android:layout_marginBottom="8dp" />
+
+            <!-- From -->
+            <EditText
+                android:id="@+id/from_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="From Date"
+                android:focusable="false"
+                android:layout_marginBottom="8dp"
+                android:inputType="none"
+                android:background="@android:drawable/edit_text" />
+
+            <!-- To -->
+            <EditText
+                android:id="@+id/to_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="To Date"
+                android:focusable="false"
+                android:layout_marginBottom="8dp"
+                android:inputType="none"
+                android:background="@android:drawable/edit_text" />
+
+            <!-- Document -->
+            <Button
+                android:id="@+id/select_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Document Image"
+                android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/bg_color2"/>
 
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="wrap_content"
+            <!-- Clear and Submit Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minWidth="100dp"
-                android:minHeight="48dp"
-                android:text="Submit"
-                android:backgroundTint="@color/bg_color2"/>
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/clear_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="100dp"
+                    android:minHeight="48dp"
+                    android:text="Clear"
+                    android:backgroundTint="@color/bg_color2"/>
+
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:minHeight="48dp"
+                    android:text="Submit"
+                    android:backgroundTint="@color/bg_color2"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>

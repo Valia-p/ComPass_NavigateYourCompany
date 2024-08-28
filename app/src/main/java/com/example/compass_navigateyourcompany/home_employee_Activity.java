@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class home_employee_Activity extends AppCompatActivity {
         setContentView(R.layout.home_employee);
 
         TextView appNameTextView = findViewById(R.id.app_name);
-        Button profileButton = findViewById(R.id.profile_button);
+        ImageView profileButton = findViewById(R.id.profile_button);
         CalendarView calendarView = findViewById(R.id.calendar_view);
 
         typeSpinner = findViewById(R.id.type_spinner);

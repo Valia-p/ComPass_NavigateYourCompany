@@ -54,6 +54,10 @@
             android:exported="true"
             android:label="signup_employee_Activity"
             android:theme="@style/Theme.ComPass_NavigateYourCompany"/>
+        <activity android:name=".home_head_Activity"
+            android:exported="true"
+            android:label="home_head_Activity"
+            android:theme="@style/Theme.ComPass_NavigateYourCompany" />
 
         <activity
             android:name=".MainActivity"
