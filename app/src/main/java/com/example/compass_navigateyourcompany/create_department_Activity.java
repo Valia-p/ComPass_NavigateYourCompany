@@ -22,7 +22,7 @@ public class create_department_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_department);
 
-        // Initialize views
+
         Button addButton = findViewById(R.id.add_button);
         Button cancelButton = findViewById(R.id.cancel_button);
         Button submitButton = findViewById(R.id.submit_button);
@@ -30,12 +30,12 @@ public class create_department_Activity extends AppCompatActivity {
         departmentNameEditText = findViewById(R.id.department_name);
         departmentListView = findViewById(R.id.department_list);
 
-        // Initialize list and adapter
+
         departmentList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, departmentList);
         departmentListView.setAdapter(adapter);
 
-        // add button functionality
+        // add button
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,13 +45,13 @@ public class create_department_Activity extends AppCompatActivity {
                 } else {
                     // Add the department name to the list
                     departmentList.add(departmentName);
-                    adapter.notifyDataSetChanged(); // Notify the adapter of the new data
+                    adapter.notifyDataSetChanged();
                     departmentNameEditText.setText(""); // Clear the input field
                 }
             }
         });
 
-        // cancel button functionality
+        // cancel button
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,27 +61,34 @@ public class create_department_Activity extends AppCompatActivity {
             }
         });
 
-        // submit button functionality
+        // submit button
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (departmentList.isEmpty()) {
                     Toast.makeText(create_department_Activity.this, "No departments to submit", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Handle submit logic here
-                    Toast.makeText(create_department_Activity.this, "Submitted: " + departmentList.toString(), Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    Intent intent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+
+                    // Optional: If you need to pass the department list to the new activity
+                    intent.putStringArrayListExtra("departments", departmentList);
+
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
 
-        // back button functionality
+        // back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start signup_employer_Activity
+
                 Intent intent = new Intent(create_department_Activity.this, signup_employer_Activity.class);
                 startActivity(intent);
-                finish(); // Finish the current activity
+                finish();
             }
         });
     }

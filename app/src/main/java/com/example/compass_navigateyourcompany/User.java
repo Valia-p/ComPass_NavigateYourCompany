@@ -2,7 +2,7 @@ package com.example.compass_navigateyourcompany;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-@Entity
+@Entity (tableName = "User")
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int id;

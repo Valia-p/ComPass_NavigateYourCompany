@@ -96,9 +96,9 @@ public class signup_employer_Activity extends AppCompatActivity {
                                         public void run() {
                                             Toast.makeText(signup_employer_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
 
-                                            Intent intent = new Intent(signup_employer_Activity.this, home_employer_Activity.class);
+                                            Intent intent = new Intent(signup_employer_Activity.this, create_department_Activity.class);
                                             startActivity(intent);
-                                            finish(); // Close the sign-up activity
+                                            finish();
                                         }
                                     });
                                 }

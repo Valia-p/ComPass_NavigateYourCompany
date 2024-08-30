@@ -5,16 +5,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(
-        entities = {User.class, Employer.class},
-        version = 1,
-        exportSchema = true
-)
+@Database(entities = {User.class, Employer.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract EmployerDao employerDao();
 
     private static volatile AppDatabase INSTANCE;
+
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
