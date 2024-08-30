@@ -4,12 +4,18 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class User {
-    @PrimaryKey
-    public int uid;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
 
-    @ColumnInfo(name = "first_name")
-    public String firstName;
+    @ColumnInfo(name = "login_name")
+    public String loginName;
 
-    @ColumnInfo(name = "last_name")
-    public String lastName;
+    @ColumnInfo(name = "password")
+    public String password;
+
+    @ColumnInfo(name = "auth_token")
+    public String authToken;
+
+    @ColumnInfo(name = "type")
+    public String type; // "Employer", "Head", or "Employee"
 }
