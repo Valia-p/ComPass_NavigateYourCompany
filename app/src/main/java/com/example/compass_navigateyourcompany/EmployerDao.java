@@ -16,5 +16,9 @@ public interface EmployerDao {
     @Query("SELECT * FROM Employer WHERE Name = :name")
     Employer findByName(String name);
 
+    // check if the authToken exists
+    @Query("SELECT COUNT(*) FROM Employer WHERE Cid = :authToken")
+    int countByAuthToken(String authToken);
+
 }
 

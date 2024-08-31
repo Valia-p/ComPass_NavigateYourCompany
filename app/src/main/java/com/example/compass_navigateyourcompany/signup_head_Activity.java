@@ -3,7 +3,6 @@ package com.example.compass_navigateyourcompany;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -17,11 +16,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class signup_head_Activity extends AppCompatActivity {
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_head);
+
+        db = AppDatabase.getInstance(this);
 
         Button backButton = findViewById(R.id.back_Button);
         Button signUpButton = findViewById(R.id.signUp_button);
@@ -36,6 +38,7 @@ public class signup_head_Activity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText nameEditText = findViewById(R.id.username);
                 EditText passwordEditText = findViewById(R.id.password);
                 EditText emailEditText = findViewById(R.id.email);
@@ -44,76 +47,106 @@ public class signup_head_Activity extends AppCompatActivity {
                 Spinner departmentSpinner = findViewById(R.id.department);
                 TextView departmentText = findViewById(R.id.departmentText);
 
+
                 String name = nameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String phone = phoneEditText.getText().toString();
                 String authToken = authTokenEditText.getText().toString();
                 String department = departmentSpinner.getSelectedItem().toString();
-                String depText = departmentText.getText().toString();
 
-                ForegroundColorSpan redColorSpan = new ForegroundColorSpan(Color.RED);
-                String hintName = nameEditText.getHint().toString();
-                SpannableString spannableString1 = new SpannableString(hintName);
-                int asteriskPosition1 = hintName.indexOf("*");
-                if (asteriskPosition1 != -1) {
-                    spannableString1.setSpan(redColorSpan, asteriskPosition1, asteriskPosition1 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                nameEditText.setHint(spannableString1);
+                // Highlight required fields
+                highlightRequiredFields(nameEditText);
+                highlightRequiredFields(passwordEditText);
+                highlightRequiredFields(emailEditText);
+                highlightRequiredFields(phoneEditText);
+                highlightRequiredFields(authTokenEditText);
+                highlightRequiredFields(departmentText);
 
-                String hintPassword = passwordEditText.getHint().toString();
-                SpannableString spannableString2 = new SpannableString(hintPassword);
-                int asteriskPosition2 = hintPassword.indexOf("*");
-                if (asteriskPosition2 != -1) {
-                    spannableString2.setSpan(redColorSpan, asteriskPosition2, asteriskPosition2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                passwordEditText.setHint(spannableString2);
-
-                String hintEmail = emailEditText.getHint().toString();
-                SpannableString spannableString3 = new SpannableString(hintEmail);
-                int asteriskPosition3 = hintEmail.indexOf("*");
-                if (asteriskPosition3 != -1) {
-                    spannableString3.setSpan(redColorSpan, asteriskPosition3, asteriskPosition3 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                emailEditText.setHint(spannableString3);
-
-                String hintPhone = phoneEditText.getHint().toString();
-                SpannableString spannableString4 = new SpannableString(hintPhone);
-                int asteriskPosition4 = hintPhone.indexOf("*");
-                if (asteriskPosition4 != -1) {
-                    spannableString4.setSpan(redColorSpan, asteriskPosition4, asteriskPosition4 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                phoneEditText.setHint(spannableString4);
-
-                String hintAuthToken = authTokenEditText.getHint().toString();
-                SpannableString spannableString5 = new SpannableString(hintAuthToken);
-                int asteriskPosition5 = hintAuthToken.indexOf("*");
-                if (asteriskPosition5 != -1) {
-                    spannableString5.setSpan(redColorSpan, asteriskPosition5, asteriskPosition5 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                authTokenEditText.setHint(spannableString5);
-
-                SpannableString spannableString6 = new SpannableString(depText);
-                int asteriskPosition6 = depText.indexOf("*");
-                if (asteriskPosition6 != -1) {
-                    spannableString6.setSpan(redColorSpan, asteriskPosition6, asteriskPosition6 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                departmentText.setText(spannableString6);
-
-                //unsuccessful sign up
+                // Validate input
                 if (name.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty() || authToken.isEmpty() || department.isEmpty()) {
                     Toast.makeText(signup_head_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    //successful sign up
-                    //clearForm();
-                    Toast.makeText(signup_head_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(signup_head_Activity.this, home_head_Activity.class);
-                    startActivity(intent);
-                    finish();
+                    // Check if the authToken is valid
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int count = db.employerDao().countByAuthToken(authToken);
+
+                            if (count == 0) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(signup_head_Activity.this, "Invalid AuthToken. No matching company found.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                return; // Exit if authToken does not exist
+                            }
+
+                            // Check if the head already exists by name
+                            Head existingHead = db.headDao().getHeadByName(name);
+
+                            if (existingHead != null) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(signup_head_Activity.this, "Head already exists", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                // Insert the head into the database
+                                Head head = new Head();
+                                head.name = name;
+                                head.authToken = authToken;
+                                head.mail = email;
+                                head.phone = phone;
+                                head.departmentId = Integer.parseInt(department);
+                                head.years = 0;
+
+                                db.headDao().insertHead(head);
+
+                                Head insertedHead = db.headDao().getHeadByName(name);
+
+                                if (insertedHead != null) {
+                                    User user = new User();
+                                    user.loginName = name;
+                                    user.password = password;
+                                    user.authToken = authToken;
+                                    user.type = "Head";
+
+                                    db.userDao().insert(user);
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(signup_head_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(signup_head_Activity.this, home_head_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }).start();
                 }
             }
         });
     }
+
+    private void highlightRequiredFields(TextView textView) {
+        String hint = textView.getHint().toString();
+        SpannableString spannableString = new SpannableString(hint);
+        ForegroundColorSpan redColorSpan = new ForegroundColorSpan(Color.RED);
+        int asteriskPosition = hint.indexOf("*");
+        if (asteriskPosition != -1) {
+            spannableString.setSpan(redColorSpan, asteriskPosition, asteriskPosition + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        textView.setHint(spannableString);
+    }
+}
+
 
 //    private void clearForm() {
 //        nameEditText.setText("");
@@ -123,4 +156,4 @@ public class signup_head_Activity extends AppCompatActivity {
 //        authTokenEditText.setText("");
 //        departmentSpinner.setSelection(0);
 //    }
-}
+

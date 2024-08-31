@@ -54,7 +54,7 @@ public class signup_employer_Activity extends AppCompatActivity {
                 if (name.isEmpty() || password.isEmpty() || email.isEmpty() || company.isEmpty() || authToken.isEmpty() || address.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(signup_employer_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Check if the employer already exists by name
+                    // Check if the employer already exists
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -87,7 +87,7 @@ public class signup_employer_Activity extends AppCompatActivity {
                                     user.loginName = name;
                                     user.password = password;
                                     user.authToken = authToken;
-                                    user.type = "Employer"; // Set the user type
+                                    user.type = "Employer";
 
                                     db.userDao().insert(user);
 
