@@ -50,10 +50,6 @@
             android:exported="true"
             android:label="head_profile_Activity"
             android:theme="@style/Theme.ComPass_NavigateYourCompany" />
-        <activity android:name=".signup_employee_Activity_Giota"
-            android:exported="true"
-            android:label="signup_employee_Activity"
-            android:theme="@style/Theme.ComPass_NavigateYourCompany"/>
         <activity android:name=".login_Activity"
             android:exported="true"
             android:label="login_Activity"
@@ -73,6 +69,10 @@
         <activity android:name=".create_department_Activity"
             android:exported="true"
             android:label="create_department_Activity"
+            android:theme="@style/Theme.ComPass_NavigateYourCompany" />
+        <activity android:name=".signup_employee_Activity"
+            android:exported="true"
+            android:label="signup_employee_Activity"
             android:theme="@style/Theme.ComPass_NavigateYourCompany" />
 
         <activity

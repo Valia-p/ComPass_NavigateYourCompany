@@ -15,10 +15,7 @@ public interface UserDao {
     @Query("SELECT * FROM User WHERE login_name = :loginName AND password = :password AND auth_token = :authToken")
     User getUser(String loginName, String password, String authToken);
 
-    @Query("SELECT * FROM User WHERE id = :id")
-    User findUserById(int id);
 
-    @Query("SELECT * FROM User WHERE auth_token = :authToken")
-    User findByAuthToken(String authToken);
-
+    @Query("SELECT * FROM User WHERE login_name = :loginName LIMIT 1")
+    User findByLoginName(String loginName);
 }

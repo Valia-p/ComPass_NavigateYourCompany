@@ -64,11 +64,7 @@ public class home_employee_Activity extends AppCompatActivity {
         clearButton = findViewById(R.id.clear_button);
         submitButton = findViewById(R.id.submit_button);
 
-        // Set up the spinner with options
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_options, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(adapter);
+
 
         // Set up date pickers for date fields
         fromDateEditText.setOnClickListener(new View.OnClickListener() {

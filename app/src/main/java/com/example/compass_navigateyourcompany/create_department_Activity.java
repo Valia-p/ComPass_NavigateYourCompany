@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 public class create_department_Activity extends AppCompatActivity {
@@ -16,12 +18,19 @@ public class create_department_Activity extends AppCompatActivity {
     private ListView departmentListView;
     private ArrayList<String> departmentList;
     private ArrayAdapter<String> adapter;
+    private AppDatabase db;
+    private String authToken; // hold the employer's authToken
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_department);
 
+        db = AppDatabase.getInstance(this);
+
+        // Get the authToken passed from the previous activity
+        Intent intent = getIntent();
+        authToken = intent.getStringExtra("authToken");
 
         Button addButton = findViewById(R.id.add_button);
         Button cancelButton = findViewById(R.id.cancel_button);
@@ -30,12 +39,11 @@ public class create_department_Activity extends AppCompatActivity {
         departmentNameEditText = findViewById(R.id.department_name);
         departmentListView = findViewById(R.id.department_list);
 
-
         departmentList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, departmentList);
         departmentListView.setAdapter(adapter);
 
-        // add button
+        // Add button
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,12 +54,12 @@ public class create_department_Activity extends AppCompatActivity {
                     // Add the department name to the list
                     departmentList.add(departmentName);
                     adapter.notifyDataSetChanged();
-                    departmentNameEditText.setText(""); // Clear the input field
+                    departmentNameEditText.setText("");
                 }
             }
         });
 
-        // cancel button
+        // Cancel button
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,31 +69,55 @@ public class create_department_Activity extends AppCompatActivity {
             }
         });
 
-        // submit button
+        // Submit button
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (departmentList.isEmpty()) {
                     Toast.makeText(create_department_Activity.this, "No departments to submit", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String cid = authToken;
 
-                    Intent intent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+                                // Insert each department into the database
+                                for (String departmentName : departmentList) {
+                                    Department department = new Department();
+                                    department.Name = departmentName;
+                                    department.Cid = cid;
+                                    db.departmentDao().insert(department);
+                                }
 
-                    // Optional: If you need to pass the department list to the new activity
-                    intent.putStringArrayListExtra("departments", departmentList);
-
-                    startActivity(intent);
-                    finish();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(create_department_Activity.this, "Departments successfully added", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(create_department_Activity.this, "An error occurred while adding departments", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
                 }
             }
         });
 
-        // back button
+        // Back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(create_department_Activity.this, signup_employer_Activity.class);
                 startActivity(intent);
                 finish();

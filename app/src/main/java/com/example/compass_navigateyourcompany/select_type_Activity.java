@@ -11,6 +11,7 @@ public class select_type_Activity extends AppCompatActivity {
     private Button employerButton;
     private Button headButton;
     private Button employeeButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class select_type_Activity extends AppCompatActivity {
         employerButton = findViewById(R.id.button1);
         headButton = findViewById(R.id.button2);
         employeeButton = findViewById(R.id.button3);
+        backButton = findViewById(R.id.back_Button);
 
         employerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +47,14 @@ public class select_type_Activity extends AppCompatActivity {
                 // Employee button
                 Intent intent;
                 intent = new Intent(select_type_Activity.this, signup_employee_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(select_type_Activity.this, login_Activity.class);
                 startActivity(intent);
             }
         });

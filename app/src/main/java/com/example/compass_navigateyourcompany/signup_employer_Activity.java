@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 public class signup_employer_Activity extends AppCompatActivity {
     private AppDatabase db;
@@ -53,21 +52,33 @@ public class signup_employer_Activity extends AppCompatActivity {
                 // Validate input
                 if (name.isEmpty() || password.isEmpty() || email.isEmpty() || company.isEmpty() || authToken.isEmpty() || address.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(signup_employer_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Check if the employer already exists
+                }
+                else {
+                    // Check if the employer already exists by name or authToken
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Employer existingEmployer = db.employerDao().findByName(name);
+                            User existingEmployerByName = db.userDao().findByLoginName(name);
+                            Employer existingEmployerByAuthToken = db.employerDao().findByAuthToken(authToken);
 
-                            if (existingEmployer != null) {
+                            if (existingEmployerByName != null) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(signup_employer_Activity.this, "Employer already exists", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(signup_employer_Activity.this, "User with this name already exists", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            } else {
+                            }
+                            // Check if authToken already exists
+                            else if (existingEmployerByAuthToken != null) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(signup_employer_Activity.this, "Employer with this authToken already exists", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            else {
                                 // Insert the employer into the database
                                 Employer employer = new Employer();
                                 employer.name = name;
@@ -78,7 +89,6 @@ public class signup_employer_Activity extends AppCompatActivity {
                                 employer.mail = email;
 
                                 db.employerDao().insert(employer);
-
 
                                 Employer insertedEmployer = db.employerDao().findByName(name);
 
@@ -97,6 +107,10 @@ public class signup_employer_Activity extends AppCompatActivity {
                                             Toast.makeText(signup_employer_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
 
                                             Intent intent = new Intent(signup_employer_Activity.this, create_department_Activity.class);
+
+                                            // Pass the authToken
+                                            intent.putExtra("authToken", authToken);
+
                                             startActivity(intent);
                                             finish();
                                         }

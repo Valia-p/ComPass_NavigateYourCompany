@@ -5,105 +5,159 @@
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
-    <!-- change the color of the * in the .java-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/back_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginBottom="16dp"
-            android:text="Back"
-            android:backgroundTint="@color/bg_color2"/>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="16dp"
-            android:text="Sign Up"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/username"
+        <!-- Form Layout -->
+        <LinearLayout
+            android:id="@+id/form_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Username *"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/password"
+            <Button
+                android:id="@+id/back_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginBottom="16dp"
+                android:text="Back"
+                android:backgroundTint="@color/bg_color2"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:text="Sign Up"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Username *"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Password *"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="E-mail *"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone *"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/auth_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Authentication token *"
+                android:inputType="text"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Year *"
+                android:inputType="number"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_UploadFile"
+                android:text="Upload CV"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:layout_marginTop="16dp"/>
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_upload"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_cv"
+                android:contentDescription="Upload CV"
+                android:background="@drawable/input_bg"/>
+
+            <Button
+                android:id="@+id/signUp_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="10dp"
+                android:text="Sign Up"
+                android:backgroundTint="@color/bg_color2"/>
+
+        </LinearLayout>
+
+        <!-- Department Selection Layout -->
+        <LinearLayout
+            android:id="@+id/department_selection_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Password *"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="16dp">
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="E-mail *"
-            android:inputType="textEmailAddress"
-            android:padding="10dp" />
+            <TextView
+                android:id="@+id/departmentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="Department *"
+                android:textSize="17sp" />
 
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone *"
-            android:inputType="phone"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"/>
+            <Spinner
+                android:id="@+id/department_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
 
-        <TextView
-            android:id="@+id/departmentText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:text="Department *"
-            android:textSize="17sp" />
+            <Button
+                android:id="@+id/submit_department_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="10dp"
+                android:text="Submit Department"
+                android:backgroundTint="@color/bg_color2"/>
 
-        <Spinner
-            android:id="@+id/department"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/type_options"
-            android:padding="10dp"
-            android:spinnerMode="dropdown" />
-
-        <EditText
-            android:id="@+id/auth_token"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Authentication token *"
-            android:inputType="text"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"/>
-
-        <Button
-            android:id="@+id/signUp_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="10dp"
-            android:text="Sign Up"
-            android:backgroundTint="@color/bg_color2"/>
-
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

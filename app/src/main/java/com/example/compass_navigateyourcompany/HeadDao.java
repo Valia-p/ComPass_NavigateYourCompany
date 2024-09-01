@@ -9,13 +9,10 @@ import java.util.List;
 public interface HeadDao {
 
     @Insert
-    long insertHead(Head head);
+    long insert(Head head);
 
     @Query("SELECT * FROM Head")
     List<Head> getAllHeads();
-
-    @Query("SELECT * FROM Head WHERE id = :id")
-    Head getHeadById(int id);
 
     @Query("SELECT * FROM Head WHERE Did = :departmentId")
     List<Head> getHeadsByDepartmentId(int departmentId);

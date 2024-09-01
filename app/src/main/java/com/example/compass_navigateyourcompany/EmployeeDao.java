@@ -13,9 +13,6 @@ public interface EmployeeDao {
     @Insert
     void insert(Employee employee);
 
-    @Query("SELECT * FROM Employee WHERE id = :id LIMIT 1")
-    Employee findById(int id);
-
     @Query("SELECT * FROM Employee WHERE Name = :name LIMIT 1")
     Employee findByName(String name);
 
