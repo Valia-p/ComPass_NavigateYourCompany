@@ -28,8 +28,7 @@ public class login_Activity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.textPassword);
         editTextToken = findViewById(R.id.texttoken);
         buttonLogin = findViewById(R.id.buttonLogin);
-        backButton = findViewById(R.id.backButton);
-        textViewSignup = findViewById(R.id.textsignup);
+        textViewSignup = findViewById(R.id.sign_up);
 
 
         db = AppDatabase.getInstance(this);
@@ -51,13 +50,6 @@ public class login_Activity extends AppCompatActivity {
             }
         });
 
-        // Back Button
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         //  Signup
         textViewSignup.setOnClickListener(new View.OnClickListener() {
