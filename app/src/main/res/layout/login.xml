@@ -7,18 +7,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/fade_bg">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/bg_color2"
-        android:text="Back"
-        android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Signup"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -26,7 +17,7 @@
         android:textColor="@color/material_dynamic_primary20"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/backButton"
+        android:paddingTop="110dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -35,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_user"
@@ -48,7 +39,7 @@
         android:paddingBottom="10dp"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintTop_toBottomOf="@id/Signup"
+        app:layout_constraintTop_toBottomOf="@id/login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -56,7 +47,7 @@
         android:id="@+id/textPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="10dp"
@@ -76,7 +67,7 @@
         android:id="@+id/texttoken"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_authtoken"
         android:drawablePadding="10dp"
@@ -105,35 +96,25 @@
         app:layout_constraintEnd_toEndOf="@id/textUsername" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Forgot Password?"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
-        app:layout_constraintEnd_toEndOf="@id/textPassword" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:text="Don't have an account yet?"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
         app:layout_constraintStart_toStartOf="@id/buttonLogin"
         app:layout_constraintEnd_toEndOf="@id/buttonLogin" />
 
     <TextView
-        android:id="@+id/textsignup"
+        android:id="@+id/sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="#FF0000"
+        android:textColor="@color/signup_color"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/textView2"
-        app:layout_constraintStart_toEndOf="@id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintStart_toStartOf="@+id/question"
+        app:layout_constraintEnd_toEndOf="@+id/question"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
