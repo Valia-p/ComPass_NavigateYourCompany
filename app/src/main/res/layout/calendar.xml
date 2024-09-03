@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/fade_bg_blue"
     android:padding="16dp">
 
@@ -10,64 +11,187 @@
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="ComPass"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Your App Name"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
 
     <!-- Profile Button -->
-    <Button
-        android:id="@+id/profile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Profile"
-        android:backgroundTint="@color/bg_color2"/>
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/circular_bg">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/profile_button"
+            android:src="@drawable/ic_user_white"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
-    <!-- Calendar View -->
-    <CalendarView
-        android:id="@+id/calendar_view"
+    <!-- Horizontal line -->
+    <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_height="1dp"
+        android:background="@color/bg_color2"
+        android:layout_marginTop="60dp" />
 
-
-    <!-- List of People with Time Off -->
-
-    <TextView
-        android:id="@+id/request_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendar_view"
-        android:layout_alignStart="@+id/calendar_view"
-        android:layout_alignEnd="@+id/calendar_view"
-        android:layout_marginStart="146.5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="146.5dp"
-        android:text="Day off"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/request_title"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line"
+        android:layout_above="@+id/bottomMenu">
 
-        <ListView
-            android:id="@+id/day_off_list"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Calendar View -->
+            <CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+
+            <!-- List of People with Time Off -->
+
+            <TextView
+                android:id="@+id/request_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calendar_view"
+                android:layout_alignStart="@+id/calendar_view"
+                android:layout_alignEnd="@+id/calendar_view"
+                android:layout_marginStart="146.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="146.5dp"
+                android:text="Day off"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/request_title"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@android:color/white"
+                android:elevation="4dp">
+
+                <ListView
+                    android:id="@+id/day_off_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/darker_gray" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_color2"
+            android:layout_marginBottom="59dp"/>
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/circular_bg">
+            <ImageView
+                android:id="@+id/home_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_home"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/circular_bg">
+            <ImageView
+                android:id="@+id/logout_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_logout"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"/>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/circular_bg">
+                <ImageView
+                    android:id="@+id/settings_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_settings"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <!-- Full Left Side Navigation View -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="wrap_content"
-            android:layout_height="226dp"
-            android:divider="@android:color/darker_gray" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/bg_color3"
+            app:menu="@menu/drawer_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </RelativeLayout>
