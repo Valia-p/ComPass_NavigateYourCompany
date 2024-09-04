@@ -17,7 +17,7 @@
       <SelectionState runConfigName="login_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="signup_head_Activity">
+      <SelectionState runConfigName="employee_profile_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

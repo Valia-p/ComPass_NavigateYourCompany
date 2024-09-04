@@ -19,4 +19,7 @@ public interface DepartmentDao {
 
     @Query("SELECT * FROM Department WHERE Cid = :cid")
     List<Department> findByCid(String cid);
+
+    @Query("SELECT * FROM Department WHERE id = :id")
+    Department findById(Integer id);
 }

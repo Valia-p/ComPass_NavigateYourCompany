@@ -98,7 +98,7 @@
                     android:id="@+id/years"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Years"
+
                     android:textSize="20sp"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="20dp"
@@ -109,7 +109,7 @@
                     android:id="@+id/leaves"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="leaves"
+
                     android:textSize="20sp"
                     android:textColor="@android:color/black"
                     android:layout_alignParentEnd="true"
@@ -127,7 +127,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Employee"
+            android:text="Department"
             android:textStyle="bold"
             android:textSize="23sp"
             android:textColor="@android:color/black"
@@ -140,11 +140,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/department_Text"
-            android:text="department"
             android:textSize="18sp"
             android:textColor="@android:color/black"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Supervisor"
+            android:textStyle="bold"
+            android:textSize="23sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/supervisor_name"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="4dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -174,7 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/email"
-                android:text="something@something.com"
+
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:paddingTop="8dp"
@@ -201,7 +222,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/phone"
-                android:text="123456789"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:paddingTop="8dp"

@@ -19,4 +19,7 @@ public interface HeadDao {
 
     @Query("SELECT * FROM Head WHERE name = :name LIMIT 1")
     Head getHeadByName(String name);
+
+    @Query("SELECT Name FROM Head WHERE Cid = :authToken AND Did = :departmentId LIMIT 1")
+    String findSupervisor(String authToken, int departmentId);
 }
