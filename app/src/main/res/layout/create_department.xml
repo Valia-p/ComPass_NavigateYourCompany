@@ -5,78 +5,85 @@
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:backgroundTint="@color/bg_color2"/>
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Department"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/back_button"/>
-
-    <EditText
-        android:id="@+id/department_name"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Department Name"
-        android:inputType="text"
-        android:layout_below="@id/title"
-        android:layout_marginTop="16dp"
-        android:padding="10dp"
-        android:background="@android:drawable/edit_text" />
+        android:layout_above="@+id/submit_button"
+        android:layout_alignParentTop="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/department_name"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/add_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add"
-            android:layout_marginEnd="8dp"
-            android:minWidth="100dp"
-            android:minHeight="48dp"
-            android:layout_gravity="center_vertical"
-            android:backgroundTint="@color/bg_color2"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:minWidth="100dp"
-            android:minHeight="48dp"
-            android:layout_gravity="center_vertical"
-            android:backgroundTint="@color/bg_color2"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:layout_gravity="start"
+                android:backgroundTint="@color/bg_color2"/>
 
-    <ListView
-        android:id="@+id/department_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/add_button"
-        android:layout_above="@id/submit_button"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Department"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/department_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Department Name"
+                android:inputType="text"
+                android:layout_marginTop="16dp"
+                android:padding="10dp"
+                android:background="@android:drawable/edit_text" />
+
+            <LinearLayout
+                android:id="@+id/linear_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/add_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="100dp"
+                    android:minHeight="48dp"
+                    android:backgroundTint="@color/bg_color2"/>
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:minWidth="100dp"
+                    android:minHeight="48dp"
+                    android:backgroundTint="@color/bg_color2"/>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/department_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"
+                android:visibility="gone"/>
+        <!-- set the visibility in java-->
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/submit_button"
@@ -85,10 +92,11 @@
         android:text="Submit"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:minWidth="200dp"
         android:minHeight="48dp"
         android:backgroundTint="@color/bg_color2"/>
+
 
 </RelativeLayout>

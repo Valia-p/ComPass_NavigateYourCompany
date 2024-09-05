@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="head_profile_Activity">
+      <SelectionState runConfigName="home_head_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="home_head_Activity">
+      <SelectionState runConfigName="signup_employee_Activity">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="signup_employer_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="login_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="employee_profile_Activity">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="employer_profile_Activity">
+      <SelectionState runConfigName="signup_head_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

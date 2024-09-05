@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,78 +8,86 @@
     android:background="@drawable/fade_bg"
     android:backgroundTintMode="add">
 
-    <TextView
-        android:id="@+id/compass"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="COMPASS"
-        android:textColor="@color/material_dynamic_primary20"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:paddingBottom="50dp">
 
-    <Button
-        android:id="@+id/back_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginBottom="16dp"
-        android:text="Back"
-        android:backgroundTint="@color/bg_color2"/>
+        <TextView
+            android:id="@+id/compass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="COMPASS"
+            android:textColor="@color/material_dynamic_primary20"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/material_dynamic_primary20"
-        android:text="Employer"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/compass"
-        app:layout_constraintStart_toStartOf="@+id/compass"
-        app:layout_constraintTop_toBottomOf="@+id/choose" />
+        <Button
+            android:id="@+id/back_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="16dp"
+            android:text="Back"
+            android:backgroundTint="@color/bg_color2"
+            tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/material_dynamic_primary20"
-        android:text="Head"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/button1"
-        app:layout_constraintStart_toStartOf="@+id/button1"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/material_dynamic_primary20"
+            android:text="Employer"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/compass"
+            app:layout_constraintStart_toStartOf="@+id/compass"
+            app:layout_constraintTop_toBottomOf="@+id/choose" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/material_dynamic_primary20"
-        android:text="Employee"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/material_dynamic_primary20"
+            android:text="Head"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/button1"
+            app:layout_constraintStart_toStartOf="@+id/button1"
+            app:layout_constraintTop_toBottomOf="@+id/button1" />
 
-    <TextView
-        android:id="@+id/choose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Choose Account Type"
-        android:textAlignment="center"
-        android:textColor="@color/material_dynamic_secondary20"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/compass"
-        app:layout_constraintStart_toStartOf="@+id/compass"
-        app:layout_constraintTop_toBottomOf="@+id/compass" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/material_dynamic_primary20"
+            android:text="Employee"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/button2"
+            app:layout_constraintStart_toStartOf="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Choose Account Type"
+            android:textAlignment="center"
+            android:textColor="@color/material_dynamic_secondary20"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/compass"
+            app:layout_constraintStart_toStartOf="@+id/compass"
+            app:layout_constraintTop_toBottomOf="@+id/compass" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
