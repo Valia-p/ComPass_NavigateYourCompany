@@ -21,7 +21,6 @@ public class employee_profile_Activity extends AppCompatActivity{
     private TextView leavesTextView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

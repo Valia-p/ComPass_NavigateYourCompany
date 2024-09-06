@@ -1,6 +1,7 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,20 +32,30 @@ public class head_profile_Activity extends AppCompatActivity {
         numOfEmployees = findViewById(R.id.emps);
 
 
+        String loginName = getIntent().getStringExtra("loginName");
         findViewById(R.id.back_button).setOnClickListener(v -> {
             Intent intent = new Intent(head_profile_Activity.this, home_head_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.home_button).setOnClickListener(v -> {
             Intent intent = new Intent(head_profile_Activity.this, home_head_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.logout_button).setOnClickListener(v -> {
-            // Optionally handle logout
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear(); // Clear all session data
+            editor.apply();
+            Intent intent = new Intent(head_profile_Activity.this, login_Activity.class);
+            startActivity(intent);
+
             finish();
         });
 
@@ -55,8 +66,8 @@ public class head_profile_Activity extends AppCompatActivity {
     private void loadProfile() {
         new Thread(() -> {
             try {
-                //String headLoginName = getIntent().getStringExtra("loginName");
-                String headLoginName = "Giota";
+                String headLoginName = getIntent().getStringExtra("loginName");
+
                 Head head = db.headDao().getHeadByName(headLoginName);
                 if (head == null) {
                     runOnUiThread(() -> Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show());

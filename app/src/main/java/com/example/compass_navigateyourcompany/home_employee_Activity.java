@@ -17,7 +17,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -45,7 +44,6 @@ public class home_employee_Activity extends AppCompatActivity {
     private String selectedFilePath;
     private AppDatabase db;
     private String login_name;
-
     private boolean isSelectingFromDate = true;
 
     @Override
@@ -174,29 +172,50 @@ public class home_employee_Activity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             if (uri != null) {
                 String filePath = getRealPathFromURI(uri);
+
                 if (filePath != null) {
                     selectedFilePath = filePath;
-                    Toast.makeText(this, "Selected: " + filePath, Toast.LENGTH_SHORT).show();
+                    Log.d("FileSelection", "Selected file path: " + selectedFilePath);
+                    Toast.makeText(this, "Selected: " + selectedFilePath, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("FileSelection", "Failed to get file path from URI.");
+                    Toast.makeText(this, "Failed to get file path", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Log.e("FileSelection", "URI is null.");
+                Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Log.e("FileSelection", "Result code: " + resultCode + ", Intent data: " + data);
         }
     }
 
     private String getRealPathFromURI(Uri uri) {
+        String path = null;
         String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String path = cursor.getString(column_index);
-            cursor.close();
-            return path;
+
+        try (Cursor cursor = getContentResolver().query(uri, projection, null, null, null)) {
+            if (cursor != null) {
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                if (cursor.moveToFirst()) {
+                    path = cursor.getString(column_index);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("getRealPathFromURI", "Failed to get real path from URI", e);
         }
-        return uri.getPath();
+
+        if (path == null) {
+            // Fall back to using the URI path
+            path = uri.getPath();
+        }
+
+        return path;
     }
 
     private void clearForm() {
@@ -270,7 +289,10 @@ public class home_employee_Activity extends AppCompatActivity {
                 // Insert pass
                 try {
                     db.passDao().insert(pass);
-                    runOnUiThread(() -> Toast.makeText(home_employee_Activity.this, "Form Submitted", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> {
+                        Toast.makeText(home_employee_Activity.this, "Form Submitted", Toast.LENGTH_SHORT).show();
+                        clearForm();
+                    });
                 } catch (Exception e) {
                     runOnUiThread(() -> Toast.makeText(home_employee_Activity.this, "Error submitting form", Toast.LENGTH_SHORT).show());
                     Log.e("SubmitForm", "Error inserting pass", e);

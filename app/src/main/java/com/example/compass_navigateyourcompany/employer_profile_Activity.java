@@ -1,6 +1,7 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -34,20 +35,30 @@ public class employer_profile_Activity extends AppCompatActivity{
         addressTextView = findViewById(R.id.address);
 
 
+        String loginName = getIntent().getStringExtra("loginName");
         findViewById(R.id.back_button).setOnClickListener(v -> {
             Intent intent = new Intent(employer_profile_Activity.this, home_employer_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.home_button).setOnClickListener(v -> {
             Intent intent = new Intent(employer_profile_Activity.this, home_employer_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.logout_button).setOnClickListener(v -> {
-            // Optionally handle logout
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear(); // Clear all session data
+            editor.apply();
+            Intent intent = new Intent(employer_profile_Activity.this, login_Activity.class);
+            startActivity(intent);
+
             finish();
         });
 
@@ -58,8 +69,8 @@ public class employer_profile_Activity extends AppCompatActivity{
     private void loadProfile() {
         new Thread(() -> {
             try {
-                //String employerLoginName = getIntent().getStringExtra("loginName");
-                String employerLoginName = "Valia";
+                String employerLoginName = getIntent().getStringExtra("loginName");
+
                 Employer employer = db.employerDao().findByName(employerLoginName);
                 if (employer == null) {
                     runOnUiThread(() -> Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show());
