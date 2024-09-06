@@ -37,8 +37,6 @@ public class home_head_Activity extends AppCompatActivity{
         });
 
 
-
-
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

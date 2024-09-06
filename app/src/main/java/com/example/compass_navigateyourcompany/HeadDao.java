@@ -22,4 +22,7 @@ public interface HeadDao {
 
     @Query("SELECT Name FROM Head WHERE Cid = :authToken AND Did = :departmentId LIMIT 1")
     String findSupervisor(String authToken, int departmentId);
+
+    @Query("SELECT COUNT(*) > 0 FROM head WHERE Did = :departmentId")
+    boolean isDepartmentExists(int departmentId);
 }

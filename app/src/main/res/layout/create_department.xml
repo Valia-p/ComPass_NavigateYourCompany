@@ -81,7 +81,7 @@
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="1dp"
                 android:visibility="gone"/>
-        <!-- set the visibility in java-->
+            <!-- set the visibility in java-->
         </LinearLayout>
     </ScrollView>
 

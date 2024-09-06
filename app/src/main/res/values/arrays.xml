@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_array">
+        <item>Parental leave</item>
+        <item>Sick leave</item>
+        <item>Vacation leave</item>
+        <item>Unpaid leave</item>
+    </string-array>
+</resources>

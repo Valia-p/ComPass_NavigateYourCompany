@@ -1,6 +1,7 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ public class employee_profile_Activity extends AppCompatActivity{
     private TextView departmentTextView;
     private TextView supervisorTextView;
     private TextView yearsTextView;
+    private TextView leavesTextView;
 
 
 
@@ -34,24 +36,34 @@ public class employee_profile_Activity extends AppCompatActivity{
         departmentTextView = findViewById(R.id.department_Text);
         supervisorTextView = findViewById(R.id.supervisor_name);
         yearsTextView = findViewById(R.id.years);
+        leavesTextView = findViewById(R.id.leaves);
 
+        String loginName = getIntent().getStringExtra("loginName");
         findViewById(R.id.back_button).setOnClickListener(v -> {
             Intent intent = new Intent(employee_profile_Activity.this, home_employee_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.home_button).setOnClickListener(v -> {
             Intent intent = new Intent(employee_profile_Activity.this, home_employee_Activity.class);
+            intent.putExtra("Name", loginName);
             startActivity(intent);
             finish();
         });
 
         findViewById(R.id.logout_button).setOnClickListener(v -> {
-            // Optionally handle logout
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear(); // Clear all session data
+            editor.apply();
+            Intent intent = new Intent(employee_profile_Activity.this, login_Activity.class);
+            startActivity(intent);
+
             finish();
         });
-
 
         loadProfile();
     }
@@ -60,8 +72,8 @@ public class employee_profile_Activity extends AppCompatActivity{
         new Thread(() -> {
             try {
 
-                //String employeeLoginName = getIntent().getStringExtra("loginName");
-                String employeeLoginName = "Gio";
+                String employeeLoginName = getIntent().getStringExtra("loginName");
+
                 Employee employee = db.employeeDao().findByName(employeeLoginName);
                 if (employee == null) {
                     runOnUiThread(() -> Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show());
@@ -72,6 +84,7 @@ public class employee_profile_Activity extends AppCompatActivity{
                 String departmentName = department != null ? department.Name : "Unknown Department";
 
                 String supervisor = db.headDao().findSupervisor(employee.authToken, employee.departmentId);
+                Integer leaves = db.passDao().countApprovedLeaves(employee.id);
 
                 // Update UI
                 runOnUiThread(() -> {
@@ -81,6 +94,7 @@ public class employee_profile_Activity extends AppCompatActivity{
                     departmentTextView.setText(departmentName);
                     supervisorTextView.setText(supervisor);
                     yearsTextView.setText(String.valueOf(employee.years));
+                    leavesTextView.setText(String.valueOf(leaves));
                 });
             }
             catch (Exception e) {

@@ -167,11 +167,18 @@ public class signup_head_Activity extends AppCompatActivity {
     private void loadDepartments(String authToken) {
         new Thread(() -> {
             try {
-                List<Department> departments = db.departmentDao().findByCid(authToken); // Fetch departments based on authToken
+                List<Department> departments = db.departmentDao().findByCid(authToken);
                 List<String> departmentNames = new ArrayList<>();
+
                 for (Department department : departments) {
-                    departmentNames.add(department.Name);
+                    // Check if department ID exists in the head table
+                    boolean existsInHead = db.headDao().isDepartmentExists(department.id);
+
+                    if (!existsInHead) {
+                        departmentNames.add(department.Name);
+                    }
                 }
+
                 runOnUiThread(() -> {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(signup_head_Activity.this, android.R.layout.simple_spinner_item, departmentNames);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

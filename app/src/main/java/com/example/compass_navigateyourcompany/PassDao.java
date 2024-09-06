@@ -11,4 +11,6 @@ public interface PassDao {
     @Insert
     void insert(Pass pass);
 
+    @Query("SELECT COUNT(*) FROM Pass WHERE Uid = :userId AND approved = 1")
+    int countApprovedLeaves(int userId);
 }

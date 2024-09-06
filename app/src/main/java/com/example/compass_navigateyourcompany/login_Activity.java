@@ -44,7 +44,8 @@ public class login_Activity extends AppCompatActivity {
 
                 if (validateInputs(username, password, token)) {
                     new LoginTask().execute(username, password, token);
-                } else {
+                }
+                else {
                     Toast.makeText(login_Activity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -89,7 +90,7 @@ public class login_Activity extends AppCompatActivity {
         protected void onPostExecute(User user) {
             if (user != null) {
                 Toast.makeText(login_Activity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                goToHomePage(user.type);
+                goToHomePage(user);
             }
             else {
                 Toast.makeText(login_Activity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
@@ -98,9 +99,9 @@ public class login_Activity extends AppCompatActivity {
     }
 
     // Go to the corresponding activity based on user type
-    private void goToHomePage(String userType) {
+    private void goToHomePage(User user) {
         Intent intent;
-        switch (userType) {
+        switch (user.type) {
             case "Employer":
                 intent = new Intent(login_Activity.this, home_employer_Activity.class);
                 break;
@@ -114,7 +115,10 @@ public class login_Activity extends AppCompatActivity {
                 Toast.makeText(login_Activity.this, "Unknown user type", Toast.LENGTH_SHORT).show();
                 return;
         }
+        // Pass userID and other information to the next activity
+        intent.putExtra("Name",user.loginName);
         startActivity(intent);
         finish();
+
     }
 }

@@ -12,7 +12,7 @@ public class Pass {
     public int id;
 
     @ColumnInfo(name = "Uid")
-    public String userID;
+    public Integer userID;
 
     @ColumnInfo(name = "Type")
     public String type;
@@ -26,4 +26,6 @@ public class Pass {
     @ColumnInfo(name = "Approved")
     public int approved; // values are 1, 0, -1
 
+    @ColumnInfo(name = "FilePath")
+    public String filePath;
 }

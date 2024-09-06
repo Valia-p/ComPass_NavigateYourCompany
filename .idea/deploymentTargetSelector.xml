@@ -8,16 +8,7 @@
       <SelectionState runConfigName="home_head_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="signup_employee_Activity">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="signup_employer_Activity">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="login_Activity">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="signup_head_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
