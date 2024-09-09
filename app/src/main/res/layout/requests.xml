@@ -1,187 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ComPass"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <!-- Horizontal line -->
-    <View
+    <RelativeLayout
+        android:id="@+id/topMenu"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/bg_color2"
-        android:layout_marginTop="60dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:elevation="4dp"
-        android:orientation="vertical">
-
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true">
         <TextView
-            android:id="@+id/requests"
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ComPass"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/circular_bg">
+
+            <ImageView
+                android:id="@+id/profile_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_user_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_color2"
+            android:layout_marginTop="59dp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomMenu"
+        android:layout_below="@+id/topMenu">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Requests"
-            android:textColor="@color/material_dynamic_primary20"
-            android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:layout_marginTop="10dp"
+            android:elevation="4dp"
+            android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="515dp">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/requests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="Requests"
+                android:textColor="@color/material_dynamic_primary20"
+                android:textSize="32sp"
+                android:textStyle="bold"/>
 
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:drawable/edit_text"
-                    android:focusable="false"
-                    android:hint=" Name"
-                    android:inputType="none" />
-
-                <EditText
-                    android:id="@+id/from_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:drawable/edit_text"
-                    android:focusable="false"
-                    android:hint="From Date"
-                    android:inputType="none" />
-
-                <EditText
-                    android:id="@+id/to_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:drawable/edit_text"
-                    android:focusable="false"
-                    android:hint="To Date"
-                    android:inputType="none" />
-
-                <EditText
-                    android:id="@+id/period"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:drawable/edit_text"
-                    android:focusable="false"
-                    android:hint="Period"
-                    android:inputType="none" />
+            <!-- is that scrollview necessary? -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/decline"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/bg_color2"
-                        android:minWidth="100dp"
-                        android:minHeight="48dp"
-                        android:text="Decline" />
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:drawable/edit_text"
+                        android:focusable="false"
+                        android:hint=" Name"
+                        android:inputType="none" />
 
-                    <Button
-                        android:id="@+id/accept"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/from_date"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/bg_color2"
-                        android:minWidth="100dp"
-                        android:minHeight="48dp"
-                        android:text="Accept" />
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:drawable/edit_text"
+                        android:focusable="false"
+                        android:hint="From Date"
+                        android:inputType="none" />
+
+                    <EditText
+                        android:id="@+id/to_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:drawable/edit_text"
+                        android:focusable="false"
+                        android:hint="To Date"
+                        android:inputType="none" />
+
+                    <EditText
+                        android:id="@+id/period"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:drawable/edit_text"
+                        android:focusable="false"
+                        android:hint="Period"
+                        android:inputType="none" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/decline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="@color/bg_color2"
+                            android:minWidth="100dp"
+                            android:minHeight="48dp"
+                            android:text="Decline"
+                            android:padding="10dp"/>
+
+                        <Button
+                            android:id="@+id/accept"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/bg_color2"
+                            android:minWidth="100dp"
+                            android:minHeight="48dp"
+                            android:text="Accept"
+                            android:padding="10dp"/>
+                    </LinearLayout>
                 </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
-
-            </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
-
-    <View
+    <!-- Bottom Menu Layout -->
+    <RelativeLayout
+        android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/bg_color2"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="640dp"/>
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true">
 
-    <FrameLayout
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="7dp"
-        android:layout_marginStart="7dp"
-        android:background="@drawable/circular_bg">
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_back_arrow"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_color2"
+            android:layout_marginBottom="59dp" />
 
-    <FrameLayout
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="7dp"
-        android:background="@drawable/circular_bg">
-        <ImageView
-            android:id="@+id/home_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_home"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/circular_bg">
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_back_arrow"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"/>
+        </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="7dp"
-        android:layout_marginEnd="7dp"
-        android:background="@drawable/circular_bg">
-        <ImageView
-            android:id="@+id/logout_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_logout"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="2dp"/>
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/circular_bg">
 
+            <ImageView
+                android:id="@+id/home_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_home"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/circular_bg">
+
+            <ImageView
+                android:id="@+id/logout_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_logout"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

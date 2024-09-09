@@ -5,24 +5,24 @@
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_gravity="start"
+        android:backgroundTint="@color/bg_color2"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/submit_button"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/back_button">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/back_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:layout_gravity="start"
-                android:backgroundTint="@color/bg_color2"/>
 
             <TextView
                 android:id="@+id/title"

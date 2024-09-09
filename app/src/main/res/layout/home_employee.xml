@@ -12,58 +12,63 @@
         android:padding="16dp"
         android:background="@drawable/fade_bg_blue">
 
+        <RelativeLayout
+            android:id="@+id/topMenu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true">
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ComPass"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp" />
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/circular_bg">
+
+                <ImageView
+                    android:id="@+id/profile_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_user_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_color2"
+                android:layout_marginTop="59dp" />
+        </RelativeLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottomMenu">
+            android:layout_above="@+id/bottomMenu"
+            android:layout_below="@+id/topMenu">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ComPass"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp" />
-
-                <FrameLayout
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="7dp"
-                    android:background="@drawable/circular_bg">
-
-                    <ImageView
-                        android:id="@+id/profile_button"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/ic_user_white"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/bg_color2"
-                    android:layout_marginTop="60dp" />
-
                 <CalendarView
                     android:id="@+id/calendar_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/app_name"
-                    android:layout_marginTop="22dp"
                     android:layout_centerHorizontal="true" />
 
                 <TextView
