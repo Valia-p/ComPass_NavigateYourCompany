@@ -8,4 +8,6 @@
     <color name="bg_color3">#9AAEBB</color>
     <color name="bg_color4">#5B99C2</color>
     <color name="signup_color">#ADCE7C</color>
+    <color name="login_color1">#0e2f56</color>
+    <color name="login_color2">#154782</color>
 </resources>
