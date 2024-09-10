@@ -55,29 +55,67 @@
                 android:layout_marginTop="59dp" />
         </RelativeLayout>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
-            android:elevation="4dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/topMenu"
+            android:layout_above="@+id/bottomMenu"
+            app:cardBackgroundColor="@android:color/transparent">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="550dp">
-
-                <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dep_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Department of "
+                        android:textSize="20sp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="department"
+                        android:textSize="20sp"
+                        android:paddingStart="150dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ListView
-                        android:id="@+id/day_off_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="@android:color/darker_gray" />
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+                    android:text="Employers"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <ListView
+                    android:id="@+id/day_off_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/darker_gray" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <!-- Bottom Menu Layout -->
         <RelativeLayout
             android:id="@+id/bottomMenu"
