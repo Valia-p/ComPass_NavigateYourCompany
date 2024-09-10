@@ -70,43 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/dep_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Department of "
-                        android:textSize="20sp"
-                        android:paddingStart="15dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="department"
-                        android:textSize="20sp"
-                        android:paddingStart="150dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Employers"
-                    android:paddingStart="15dp"
-                    android:paddingTop="10dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                <!--εδώ θα έχουμε εργαζόμενο + τμήμα-->
 
                 <ListView
                     android:id="@+id/day_off_list"
