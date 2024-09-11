@@ -26,4 +26,7 @@ public class Head {
 
     @ColumnInfo(name = "Years")
     public int years;
+
+    @ColumnInfo(name = "FilePath")
+    public String filePath;
 }

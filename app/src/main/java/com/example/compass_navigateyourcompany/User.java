@@ -18,4 +18,8 @@ public class User {
 
     @ColumnInfo(name = "type")
     public String type; // "Employer", "Head", or "Employee"
+
+    public int getId() {
+        return id;
+    }
 }

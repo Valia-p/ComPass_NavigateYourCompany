@@ -25,9 +25,4 @@ public interface EmployeeDao {
     @Query("SELECT * FROM Employee WHERE Cid = :authToken LIMIT 1")
     Employee findByAuthToken(String authToken);
 
-    @Query("SELECT * FROM Employee WHERE id = :id")
-    Employee findById(Integer id);
-
-    @Query("SELECT * FROM Employee")
-    List<Employee> getAllEmployees();
 }

@@ -20,6 +20,7 @@ public class create_department_Activity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private AppDatabase db;
     private String authToken; // hold the employer's authToken
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class create_department_Activity extends AppCompatActivity {
         // Get the authToken passed from the previous activity
         Intent intent = getIntent();
         authToken = intent.getStringExtra("authToken");
+        name = intent.getStringExtra("Name");
+
 
         Button addButton = findViewById(R.id.add_button);
         Button cancelButton = findViewById(R.id.cancel_button);
@@ -95,6 +98,7 @@ public class create_department_Activity extends AppCompatActivity {
                                     public void run() {
                                         Toast.makeText(create_department_Activity.this, "Departments successfully added", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+                                        intent.putExtra("Name", name);
                                         startActivity(intent);
                                         finish();
                                     }

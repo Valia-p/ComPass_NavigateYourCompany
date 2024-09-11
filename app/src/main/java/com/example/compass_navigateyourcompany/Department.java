@@ -11,4 +11,8 @@ public class Department {
     public String Cid;
 
     public String Name;
+
+    public String getName() {
+        return Name;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 public class home_head_Activity extends AppCompatActivity{
+    private String login_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,39 +31,46 @@ public class home_head_Activity extends AppCompatActivity{
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(navigationView);
-            }
+        // Get user login name from Intent
+        Intent intent = getIntent();
+        if (intent != null) {
+            login_name = intent.getStringExtra("Name");
+
+        }
+
+        settingsButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
+
+        profileButton.setOnClickListener(v -> {
+            Intent intentProfile = new Intent(home_head_Activity.this, head_profile_Activity.class);
+            intentProfile.putExtra("loginName", login_name);
+            startActivity(intentProfile);
+            finish();
         });
 
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(home_head_Activity.this, head_profile_Activity.class);
-                startActivity(intent);
-                finish();
-            }
+        homeButton.setOnClickListener(v -> {
+            Intent intentProfile = new Intent(home_head_Activity.this, home_head_Activity.class);
+            intentProfile.putExtra("Name", login_name);
+            startActivity(intentProfile);
+            finish();
         });
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(home_head_Activity.this, home_head_Activity.class);
-                startActivity(intent);
-                finish();
-            }
+        logoutButton.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear(); // Clear all data
+            editor.apply();
+
+            Intent intentLogin = new Intent(home_head_Activity.this, login_Activity.class);
+            startActivity(intentLogin);
+            finish();
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(home_head_Activity.this, login_Activity.class);
-//                startActivity(intent);
-                finish();
-            }
+        requestsButton.setOnClickListener(v -> {
+            Intent intentRequests = new Intent(home_head_Activity.this, RequestsActivity.class);
+            intentRequests.putExtra("Name",login_name);
+            startActivity(intentRequests);
+            finish();
         });
+
     }
 }

@@ -72,6 +72,7 @@ public class home_employee_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             login_name = intent.getStringExtra("Name");
+
         }
 
         settingsButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
@@ -85,8 +86,10 @@ public class home_employee_Activity extends AppCompatActivity {
         });
 
         homeButton.setOnClickListener(v -> {
-            Intent intentHome = new Intent(home_employee_Activity.this, home_employee_Activity.class);
-            startActivity(intentHome);
+            String loginName = login_name;
+            Intent intentProfile = new Intent(home_employee_Activity.this, home_employee_Activity.class);
+            intentProfile.putExtra("Name", loginName);
+            startActivity(intentProfile);
             finish();
         });
 

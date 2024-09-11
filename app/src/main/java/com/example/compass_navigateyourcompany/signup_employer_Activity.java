@@ -110,6 +110,7 @@ public class signup_employer_Activity extends AppCompatActivity {
 
                                             // Pass the authToken
                                             intent.putExtra("authToken", authToken);
+                                            intent.putExtra("Name", name);
 
                                             startActivity(intent);
                                             finish();

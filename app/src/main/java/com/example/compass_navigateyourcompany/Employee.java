@@ -26,4 +26,15 @@ public class Employee {
 
     @ColumnInfo(name = "Years")
     public int years;
+
+    @ColumnInfo(name = "FilePath")
+    public String filePath;
+
+    public int getId() {
+        return id;
+    }
+
+    public String toString() {
+        return "Employee{id=" + id + ", name='" + name + "', authToken='" + authToken + "'}";
+    }
 }

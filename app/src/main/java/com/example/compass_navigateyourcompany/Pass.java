@@ -28,4 +28,8 @@ public class Pass {
 
     @ColumnInfo(name = "FilePath")
     public String filePath;
+
+    public int getId() {
+        return id;
+    }
 }
