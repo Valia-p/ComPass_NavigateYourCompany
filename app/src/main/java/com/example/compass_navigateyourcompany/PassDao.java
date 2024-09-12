@@ -18,7 +18,7 @@ public interface PassDao {
     @Query("SELECT COUNT(*) FROM Pass WHERE Uid = :userId AND approved = 1")
     int countApprovedLeaves(int userId);
 
-    @Query("SELECT * FROM pass WHERE Uid IN (:userIds)")
+    @Query("SELECT * FROM pass WHERE Uid IN (:userIds) AND approved = 0")
     List<Pass> getPassesByUserIds(List<Integer> userIds);
 
 }

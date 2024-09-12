@@ -6,6 +6,7 @@
     android:padding="16dp"
     android:background="@drawable/fade_bg_blue">
 
+    <!-- Top Menu -->
     <RelativeLayout
         android:id="@+id/topMenu"
         android:layout_width="match_parent"
@@ -50,23 +51,45 @@
             android:layout_marginTop="59dp" />
     </RelativeLayout>
 
-    <!-- Container for dynamic requests -->
+    <!-- Scrollable Container for dynamic requests and the message -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomMenu"
-        android:layout_below="@+id/topMenu"
+        android:layout_height="0dp"
+        android:layout_above="@id/bottomMenu"
+        android:layout_below="@id/topMenu"
         android:padding="16dp">
 
+        <!-- LinearLayout to contain requests dynamically -->
         <LinearLayout
-            android:id="@+id/requests_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <!-- Container for dynamic requests -->
+            <LinearLayout
+                android:id="@+id/requests_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <!-- TextView to display when no requests are left -->
+            <TextView
+                android:id="@+id/no_requests_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No other requests"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:padding="16dp"
+                android:visibility="gone" /> <!-- Initially hidden -->
+
         </LinearLayout>
     </ScrollView>
 
+    <!-- Bottom Menu -->
     <RelativeLayout
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
@@ -77,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/bg_color2"
-            android:layout_marginBottom="59dp" />
+            android:layout_alignParentTop="true" />
 
         <FrameLayout
             android:layout_width="40dp"
@@ -133,6 +156,6 @@
                 android:focusable="true"
                 android:layout_gravity="center"/>
         </FrameLayout>
-
     </RelativeLayout>
+
 </RelativeLayout>

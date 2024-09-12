@@ -25,4 +25,5 @@ public interface HeadDao {
 
     @Query("SELECT COUNT(*) > 0 FROM head WHERE Did = :departmentId")
     boolean isDepartmentExists(int departmentId);
+
 }

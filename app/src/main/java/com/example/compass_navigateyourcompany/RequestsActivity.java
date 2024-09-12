@@ -1,9 +1,14 @@
 package com.example.compass_navigateyourcompany;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -24,8 +30,11 @@ import java.util.stream.Collectors;
 public class RequestsActivity extends AppCompatActivity {
 
     private LinearLayout requestsContainer;
+    private TextView noRequestsMessage;
     private AppDatabase db;
     private String login_name;
+
+    private static final int REQUEST_WRITE_STORAGE = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,7 @@ public class RequestsActivity extends AppCompatActivity {
 
         // Initialize views
         requestsContainer = findViewById(R.id.requests_container);
+        noRequestsMessage = findViewById(R.id.no_requests_message);
         ImageView backButton = findViewById(R.id.back_button);
         ImageView profileButton = findViewById(R.id.profile_button);
         ImageView homeButton = findViewById(R.id.home_button);
@@ -58,8 +68,13 @@ public class RequestsActivity extends AppCompatActivity {
     private void loadRequests() {
         Executors.newSingleThreadExecutor().execute(() -> {
             User headUser = db.userDao().findByLoginName(login_name);
-            if (headUser != null) {
+            Head head = db.headDao().getHeadByName(login_name);
+
+            if (headUser != null && head != null) {
                 String authToken = headUser.authToken;
+                Integer headDepartmentId = head.departmentId; // Get the department ID of the head
+
+                // Fetch employees by auth token
                 List<User> users = db.userDao().findEmployeeUsersByAuthToken(authToken);
 
                 if (users == null || users.isEmpty()) {
@@ -67,82 +82,114 @@ public class RequestsActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Integer> userIds = users.stream().map(User::getId).collect(Collectors.toList());
-                Log.d("RequestsActivity", "Employee User IDs: " + userIds);
+                // Filter users based on the department ID of the head
+                List<User> filteredUsers = users.stream()
+                        .filter(user -> {
+                            Integer userDepartmentId = db.employeeDao().findDepartmentIdByLoginName(user.loginName);
+                            return userDepartmentId != null && userDepartmentId.equals(headDepartmentId);
+                        })
+                        .collect(Collectors.toList());
+
+                if (filteredUsers.isEmpty()) {
+                    runOnUiThread(() -> showNoRequestsMessage(true));
+                    return;
+                }
+
+                List<Integer> userIds = filteredUsers.stream().map(User::getId).collect(Collectors.toList());
+                Log.d("RequestsActivity", "Filtered Employee User IDs: " + userIds);
+
 
                 List<Pass> passes = db.passDao().getPassesByUserIds(userIds);
                 if (passes == null || passes.isEmpty()) {
-                    runOnUiThread(() -> Toast.makeText(RequestsActivity.this, "No passes found", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> showNoRequestsMessage(true));
                     return;
                 }
 
                 runOnUiThread(() -> {
-                    requestsContainer.removeAllViews(); // Clear existing views
+                    requestsContainer.removeAllViews();
+                    boolean hasRequests = false;
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
                     for (Pass pass : passes) {
-                        User user = users.stream().filter(u -> u.getId() == pass.userID).findFirst().orElse(null);
+                        if (pass.approved == 0) {
+                            hasRequests = true;
 
-                        // Create and configure the name TextView
-                        TextView nameTextView = new TextView(RequestsActivity.this);
-                        nameTextView.setText(user != null ? user.loginName : "Unknown");
-                        nameTextView.setTextSize(23);
-                        nameTextView.setTypeface(null, Typeface.BOLD);
-                        nameTextView.setTextColor(getResources().getColor(R.color.black));
-                        nameTextView.setPadding(15, 10, 0, 0);
+                            User user = filteredUsers.stream().filter(u -> u.getId() == pass.userID).findFirst().orElse(null);
 
-                        // Create and configure the from date TextView
-                        TextView fromDateTextView = new TextView(RequestsActivity.this);
-                        fromDateTextView.setText(pass.fromDate != null ? dateFormat.format(pass.fromDate) : "N/A");
-                        fromDateTextView.setTextSize(18);
-                        fromDateTextView.setTextColor(getResources().getColor(R.color.black));
-                        fromDateTextView.setPadding(30, 0, 0, 10);
+                            // Create and add views for the request...
+                            TextView nameTextView = new TextView(RequestsActivity.this);
+                            nameTextView.setText(user != null ? user.loginName : "Unknown");
+                            nameTextView.setTextSize(23);
+                            nameTextView.setTypeface(null, Typeface.BOLD);
+                            nameTextView.setTextColor(getResources().getColor(R.color.black));
+                            nameTextView.setPadding(15, 10, 0, 0);
 
-                        // Create and configure the to date TextView
-                        TextView toDateTextView = new TextView(RequestsActivity.this);
-                        toDateTextView.setText(pass.toDate != null ? dateFormat.format(pass.toDate) : "N/A");
-                        toDateTextView.setTextSize(18);
-                        toDateTextView.setTextColor(getResources().getColor(R.color.black));
-                        toDateTextView.setPadding(30, 0, 0, 10);
+                            TextView typeTextView = new TextView(RequestsActivity.this);
+                            typeTextView.setText("Type: " + (pass.type != null ? pass.type : "N/A"));
+                            typeTextView.setTextSize(18);
+                            typeTextView.setTextColor(getResources().getColor(R.color.black));
+                            typeTextView.setPadding(15, 0, 0, 10);
 
-                        // Create and configure the period TextView
-                        long diffInMillis = pass.toDate.getTime() - pass.fromDate.getTime();
-                        long diffInDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-                        TextView periodTextView = new TextView(RequestsActivity.this);
-                        periodTextView.setText(diffInDays + " days");
-                        periodTextView.setTextSize(18);
-                        periodTextView.setTextColor(getResources().getColor(R.color.black));
-                        periodTextView.setPadding(30, 0, 0, 10);
+                            TextView fromDateTextView = new TextView(RequestsActivity.this);
+                            fromDateTextView.setText("From: " + (pass.fromDate != null ? dateFormat.format(pass.fromDate) : "N/A"));
+                            fromDateTextView.setTextSize(18);
+                            fromDateTextView.setTextColor(getResources().getColor(R.color.black));
+                            fromDateTextView.setPadding(30, 0, 0, 10);
 
-                        // Create and configure the accept button
-                        Button acceptButton = new Button(RequestsActivity.this);
-                        acceptButton.setText("Accept");
-                        acceptButton.setOnClickListener(v -> updatePassStatus(pass, 1));
+                            TextView toDateTextView = new TextView(RequestsActivity.this);
+                            toDateTextView.setText("To: " + (pass.toDate != null ? dateFormat.format(pass.toDate) : "N/A"));
+                            toDateTextView.setTextSize(18);
+                            toDateTextView.setTextColor(getResources().getColor(R.color.black));
+                            toDateTextView.setPadding(30, 0, 0, 10);
 
-                        // Create and configure the decline button
-                        Button declineButton = new Button(RequestsActivity.this);
-                        declineButton.setText("Decline");
-                        declineButton.setOnClickListener(v -> updatePassStatus(pass, -1));
+                            long diffInMillis = pass.toDate.getTime() - pass.fromDate.getTime();
+                            long diffInDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+                            TextView periodTextView = new TextView(RequestsActivity.this);
+                            periodTextView.setText("Period: " + diffInDays + " days");
+                            periodTextView.setTextSize(18);
+                            periodTextView.setTextColor(getResources().getColor(R.color.black));
+                            periodTextView.setPadding(30, 0, 0, 10);
 
-                        // Add all views to a container layout
-                        LinearLayout requestLayout = new LinearLayout(RequestsActivity.this);
-                        requestLayout.setOrientation(LinearLayout.VERTICAL);
-                        requestLayout.setPadding(16, 16, 16, 16);
+                            Button acceptButton = new Button(RequestsActivity.this);
+                            acceptButton.setText("Accept");
+                            acceptButton.setOnClickListener(v -> updatePassStatus(pass, 1));
 
-                        requestLayout.addView(nameTextView);
-                        requestLayout.addView(fromDateTextView);
-                        requestLayout.addView(toDateTextView);
-                        requestLayout.addView(periodTextView);
-                        requestLayout.addView(acceptButton);
-                        requestLayout.addView(declineButton);
+                            Button declineButton = new Button(RequestsActivity.this);
+                            declineButton.setText("Decline");
+                            declineButton.setOnClickListener(v -> updatePassStatus(pass, -1));
 
-                        // Add the request layout to the container
-                        requestsContainer.addView(requestLayout);
+                            LinearLayout requestLayout = new LinearLayout(RequestsActivity.this);
+                            requestLayout.setOrientation(LinearLayout.VERTICAL);
+                            requestLayout.setPadding(16, 16, 16, 16);
+
+                            requestLayout.addView(nameTextView);
+                            requestLayout.addView(typeTextView);
+                            requestLayout.addView(fromDateTextView);
+                            requestLayout.addView(toDateTextView);
+                            requestLayout.addView(periodTextView);
+                            requestLayout.addView(acceptButton);
+                            requestLayout.addView(declineButton);
+
+                            if ("Sick Leave".equals(pass.type) && pass.filePath != null && !pass.filePath.isEmpty()) {
+                                Button documentButton = new Button(RequestsActivity.this);
+                                documentButton.setText("Download Document");
+                                documentButton.setOnClickListener(v -> {
+                                    if (checkStoragePermissions()) {
+                                        downloadDocument(pass.filePath);
+                                    }
+                                });
+                                requestLayout.addView(documentButton);
+                            }
+
+                            requestsContainer.addView(requestLayout);
+                        }
                     }
+
+                    showNoRequestsMessage(!hasRequests);
                 });
             } else {
-                runOnUiThread(() -> Toast.makeText(RequestsActivity.this, "Head user not found", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(RequestsActivity.this, "Head user or department not found", Toast.LENGTH_SHORT).show());
             }
         });
     }
@@ -154,9 +201,14 @@ public class RequestsActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 String message = isAccepted == 1 ? "Request Accepted" : "Request Declined";
                 Toast.makeText(RequestsActivity.this, message, Toast.LENGTH_SHORT).show();
-                loadRequests(); // Reload requests
+                loadRequests(); // Refresh the requests after accepting or declining
             });
         });
+    }
+
+    private void showNoRequestsMessage(boolean show) {
+        noRequestsMessage.setVisibility(show ? View.VISIBLE : View.GONE);
+        requestsContainer.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     private void navigateTo(Class<?> activityClass) {
@@ -176,5 +228,30 @@ public class RequestsActivity extends AppCompatActivity {
         Intent intentLogin = new Intent(RequestsActivity.this, login_Activity.class);
         startActivity(intentLogin);
         finish();
+    }
+
+    private boolean checkStoragePermissions() {
+        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_STORAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private void downloadDocument(String url) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle("Downloading Document");
+        request.setDescription("Please wait...");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "document.pdf");
+
+        DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        if (downloadManager != null) {
+            downloadManager.enqueue(request);
+            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Download manager not available", Toast.LENGTH_SHORT).show();
+        }
     }
 }
