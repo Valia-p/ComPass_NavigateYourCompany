@@ -17,9 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ComPass"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="@color/main_color"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp" />
@@ -51,19 +51,21 @@
     </RelativeLayout>
 
     <!-- Department Name TextView placed below the top menu -->
+
+    <!-- Scrollable Container for dynamic requests and the message -->
     <TextView
         android:id="@+id/department_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Department: Name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
         android:layout_below="@id/topMenu"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Department: Name"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- Scrollable Container for dynamic requests and the message -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
