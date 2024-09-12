@@ -78,6 +78,10 @@
             android:exported="true"
             android:label="RequestsActivity"
             android:theme="@style/Theme.ComPass_NavigateYourCompany" />
+        <activity android:name=".department_employees_Activity"
+            android:exported="true"
+            android:label="department_employees_Activity"
+            android:theme="@style/Theme.ComPass_NavigateYourCompany" />
 
 
 

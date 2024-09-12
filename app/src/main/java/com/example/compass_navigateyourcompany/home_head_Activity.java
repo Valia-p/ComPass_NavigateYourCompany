@@ -72,5 +72,12 @@ public class home_head_Activity extends AppCompatActivity{
             finish();
         });
 
+        employeesButton.setOnClickListener(v -> {
+            Intent intentRequests = new Intent(home_head_Activity.this, department_employees_Activity.class);
+            intentRequests.putExtra("Name",login_name);
+            startActivity(intentRequests);
+            finish();
+        });
+
     }
 }
