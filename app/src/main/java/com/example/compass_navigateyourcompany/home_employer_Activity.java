@@ -1,136 +1,119 @@
 package com.example.compass_navigateyourcompany;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
-
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class home_employer_Activity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private NavigationView navigationView;
-    private ImageView profileButton, homeButton, logoutButton, settingsButton;
+    private LinearLayout userListContainer;
     private AppDatabase db;
     private String login_name;
-    private TextView departmentTextView, employeeNameTextView;
-    private User user = null;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_employer); // Ensure this is the correct XML file
 
-        // Initialize views and database
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        // Initialize views
+        userListContainer = findViewById(R.id.employee_container);
+        ImageView backButton = findViewById(R.id.settings_button);
+        ImageView profileButton = findViewById(R.id.profile_button);
+        ImageView homeButton = findViewById(R.id.home_button);
+        ImageView logoutButton = findViewById(R.id.logout_button);
 
+        db = AppDatabase.getInstance(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        profileButton = findViewById(R.id.profile_button);
-        homeButton = findViewById(R.id.home_button);
-        logoutButton = findViewById(R.id.logout_button);
-        settingsButton = findViewById(R.id.settings_button);
-        departmentTextView = findViewById(R.id.department);
-        employeeNameTextView = findViewById(R.id.employee_name);
-
+        // Get user login name from Intent
         Intent intent = getIntent();
         if (intent != null) {
             login_name = intent.getStringExtra("Name");
-            user = db.userDao().findByLoginName(login_name);
-            Log.d("home_employer_Activity", "Received loginName: " + login_name);
         }
 
-        DepartmentInfo(user);
+        loadUsers();
 
-        settingsButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
-
-        profileButton.setOnClickListener(v -> {
-            String loginName = login_name;
-            Intent intentProfile = new Intent(home_employer_Activity.this, employer_profile_Activity.class);
-            intentProfile.putExtra("loginName", loginName);
-            startActivity(intentProfile);
-            finish();
-        });
-
-        homeButton.setOnClickListener(v -> {
-            String loginName = login_name;
-            Intent intentProfile = new Intent(home_employer_Activity.this, home_employer_Activity.class);
-            intentProfile.putExtra("Name", loginName);
-            startActivity(intentProfile);
-            finish();
-        });
-
-        logoutButton.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear(); // Clear all data
-            editor.apply();
-
-            Intent intentLogin = new Intent(home_employer_Activity.this, login_Activity.class);
-            startActivity(intentLogin);
-            finish();
-        });
+        backButton.setOnClickListener(v -> navigateTo(home_employer_Activity.class));
+        profileButton.setOnClickListener(v -> navigateTo(employer_profile_Activity.class));
+        homeButton.setOnClickListener(v -> navigateTo(home_employer_Activity.class));
+        logoutButton.setOnClickListener(this::logout);
     }
 
-    private void DepartmentInfo(User user) {
-        new Thread(() -> {
-            try {
+    private void loadUsers() {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User currentUser = db.userDao().findByLoginName(login_name);
+            if (currentUser != null) {
+                String authToken = currentUser.authToken;
+                List<User> users = db.userDao().findEmployeeUsersByAuthToken(authToken);
 
-                List<Department> departments = db.departmentDao().findByCid(user.authToken);
+                if (users == null || users.isEmpty()) {
+                    runOnUiThread(() -> Toast.makeText(home_employer_Activity.this, "No employees found with the same auth token", Toast.LENGTH_SHORT).show());
+                    return;
+                }
 
-                // Updating the UI
                 runOnUiThread(() -> {
-                    if (departments != null && !departments.isEmpty()) {
-                        StringBuilder departmentNames = new StringBuilder();
-                        for (Department department : departments) {
-                            departmentNames.append(department.getName()).append("\n");
-                        }
-                        departmentTextView.setText(departmentNames.toString().trim());
-                    } else {
-                        departmentTextView.setText("No departments found");
+                    userListContainer.removeAllViews(); // Clear existing views
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+                    for (User user : users) {
+                        // Create and configure the user layout
+                        LinearLayout userLayout = new LinearLayout(home_employer_Activity.this);
+                        userLayout.setOrientation(LinearLayout.VERTICAL);
+                        userLayout.setPadding(16, 16, 16, 16);
+                        userLayout.setBackgroundResource(R.drawable.rounded_corners); // Assuming you have a drawable for rounded corners
+
+                        // Create and configure name TextView
+                        TextView nameTextView = new TextView(home_employer_Activity.this);
+                        nameTextView.setText(user.loginName != null ? user.loginName : "Unknown");
+                        nameTextView.setTextSize(20);
+                        nameTextView.setTypeface(null, Typeface.BOLD);
+                        nameTextView.setTextColor(getResources().getColor(R.color.bg_color));
+                        nameTextView.setPadding(0, 0, 0, 8);
+
+                        // Add TextView to layout
+                        userLayout.addView(nameTextView);
+
+                        // Add layout to user list container
+                        userListContainer.addView(userLayout);
                     }
-                    employeeNameTextView.setText(login_name);
                 });
-            } catch (Exception e) {
-                Log.e("home_employer_Activity", "Error fetching department info", e);
+            } else {
+                runOnUiThread(() -> Toast.makeText(home_employer_Activity.this, "User not found", Toast.LENGTH_SHORT).show());
             }
-        }).start();
+        });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void navigateTo(Class<?> activityClass) {
+        Intent intent = new Intent(home_employer_Activity.this, activityClass);
+        intent.putExtra("Name", login_name);
+        startActivity(intent);
+        finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(navigationView)) {
-            drawerLayout.closeDrawer(navigationView);
-        } else {
-            super.onBackPressed();
-        }
+    private void logout(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear(); // Clear all data
+        editor.apply();
+
+        Intent intentLogin = new Intent(home_employer_Activity.this, login_Activity.class);
+        startActivity(intentLogin);
+        finish();
     }
 }

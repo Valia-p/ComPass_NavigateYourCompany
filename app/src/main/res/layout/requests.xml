@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true">
+
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
@@ -49,176 +50,22 @@
             android:layout_marginTop="59dp" />
     </RelativeLayout>
 
-    <!-- Bottom Menu Layout -->
-    <androidx.cardview.widget.CardView
+    <!-- Container for dynamic requests -->
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomMenu"
         android:layout_below="@+id/topMenu"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="11dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/transparent">
+        android:padding="16dp">
 
         <LinearLayout
+            android:id="@+id/requests_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/requests"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:text="Requests"
-                android:textColor="@color/material_dynamic_primary20"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corners"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="8dp"
-                        android:text="Name: "
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="75dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Name"
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="8dp"
-                        android:text="From: "
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/from_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:inputType="none"
-                        android:paddingStart="75dp"
-                        android:text="0/0/0"
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="8dp"
-                        android:text="To: "
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/to_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:inputType="none"
-                        android:paddingStart="75dp"
-                        android:text="0/0/0"
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="8dp"
-                        android:text="Period: "
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/period"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:inputType="none"
-                        android:paddingStart="76dp"
-                        android:text="Period"
-                        android:textColor="@color/material_dynamic_primary20"
-                        android:textSize="20dp" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/accept"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/bg_color2"
-                        android:minWidth="100dp"
-                        android:minHeight="48dp"
-                        android:padding="10dp"
-                        android:text="Accept" />
-
-                    <Button
-                        android:id="@+id/decline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/bg_color2"
-                        android:minWidth="100dp"
-                        android:minHeight="48dp"
-                        android:padding="10dp"
-                        android:text="Decline" />
-                </LinearLayout>
-            </LinearLayout>
+            android:orientation="vertical">
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/bottomMenu"
