@@ -58,69 +58,32 @@
                 android:layout_marginTop="59dp" />
         </RelativeLayout>
 
-        <!-- Employee and Department Information -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
+        <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/topMenu"
-            android:layout_above="@+id/bottomMenu"
-            app:cardBackgroundColor="@android:color/transparent">
+            android:layout_height="0dp"
+            android:layout_above="@id/bottomMenu"
+            android:layout_below="@id/topMenu"
+            android:padding="16dp">
 
+            <!--contains department name, head and employees-->
             <LinearLayout
-                android:id="@+id/employee_container"
+                android:id="@+id/page_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/employee_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:paddingTop="10dp"
-                    android:paddingStart="15dp" />
-
-                <RelativeLayout
+                <!-- User List Container -->
+                <LinearLayout
+                    android:id="@+id/employee_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Department of "
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:paddingStart="30dp"
-                        android:paddingBottom="5dp" />
-
-                    <TextView
-                        android:id="@+id/department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="department"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:paddingStart="150dp"
-                        android:paddingBottom="5dp" />
-                </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <!-- User List Container -->
-        <LinearLayout
-            android:id="@+id/user_list_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/card_view"
-            android:orientation="vertical"
-            android:padding="16dp" />
+        </ScrollView>
 
         <!-- Bottom Menu Layout -->
         <RelativeLayout
