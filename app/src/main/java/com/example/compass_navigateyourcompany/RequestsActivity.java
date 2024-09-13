@@ -176,28 +176,20 @@ public class RequestsActivity extends AppCompatActivity {
                             Button acceptButton = new Button(RequestsActivity.this);
                             acceptButton.setText("Accept");
                             acceptButton.setTextColor(ContextCompat.getColorStateList(this, R.color.white));
-                            acceptButton.setMinWidth(100);
-                            acceptButton.setMinHeight(48);
-                            acceptButton.setPadding(10, 10, 10, 10);
-                            acceptButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.main_color));
-//                            acceptButton.setBackgroundResource(R.drawable.button_bg_corners);
+                            acceptButton.setBackgroundResource(R.drawable.button_bg_corners);
                             acceptButton.setOnClickListener(v -> updatePassStatus(pass, 1));
 
                             Button declineButton = new Button(RequestsActivity.this);
                             declineButton.setText("Decline");
                             declineButton.setTextColor(ContextCompat.getColorStateList(this, R.color.white));
-                            declineButton.setMinWidth(100);
-                            declineButton.setMinHeight(48);
-                            declineButton.setPadding(10, 10, 10, 10);
-                            declineButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.main_color));
-//                            declineButton.setBackgroundResource(R.drawable.button_bg_corners);
+                            declineButton.setBackgroundResource(R.drawable.button_bg_corners);
                             declineButton.setOnClickListener(v -> updatePassStatus(pass, -1));
 
-//                            // Add margin to the Decline button to create space between buttons
-//                            LinearLayout.LayoutParams declineParams = new LinearLayout.LayoutParams(
-//                                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                            declineParams.setMargins(16, 0, 0, 0); // This will add a margin of 16px (~5dp)
-//                            declineButton.setLayoutParams(declineParams);
+                            // Add margin to the Decline button to create space between buttons
+                            LinearLayout.LayoutParams declineParams = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            declineParams.setMargins(16, 0, 0, 0); // This will add a margin of 16px (~5dp)
+                            declineButton.setLayoutParams(declineParams);
 
                             buttonLayout.addView(acceptButton);
                             buttonLayout.addView(declineButton);
