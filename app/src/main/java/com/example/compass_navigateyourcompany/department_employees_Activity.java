@@ -88,11 +88,10 @@ public class department_employees_Activity extends AppCompatActivity {
                             hasEmployees = true;
 
                             TextView nameTextView = new TextView(department_employees_Activity.this);
-                            nameTextView.setText(employee.name != null ? employee.name : "Unknown");
-                            nameTextView.setTextSize(23);
-                            nameTextView.setTypeface(null, Typeface.BOLD);
+                            nameTextView.setText(employee.name != null ? "- " + employee.name : "Unknown");
+                            nameTextView.setTextSize(20);
                             nameTextView.setTextColor(getResources().getColor(R.color.black));
-                            nameTextView.setPadding(15, 10, 0, 0);
+                            nameTextView.setPadding(30, 10, 0, 5);
 
 
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

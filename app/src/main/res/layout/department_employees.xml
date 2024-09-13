@@ -50,50 +50,54 @@
             android:layout_marginTop="59dp" />
     </RelativeLayout>
 
-    <!-- Department Name TextView placed below the top menu -->
-
-    <!-- Scrollable Container for dynamic requests and the message -->
-    <TextView
-        android:id="@+id/department_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topMenu"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Department: Name"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@id/bottomMenu"
-        android:layout_below="@id/department_name"
-        android:padding="16dp">
+        android:layout_below="@id/topMenu">
 
-        <!-- LinearLayout to contain employee names dynamically -->
-        <LinearLayout
-            android:id="@+id/employees_container"
+    <!-- Scrollable Container for dynamic requests and the message -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <!-- TextView to display when no employees are left -->
             <TextView
-                android:id="@+id/no_employees_message"
+                android:id="@+id/department_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Department: Name"
+                android:textColor="@color/main_color"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- LinearLayout to contain employee names dynamically -->
+            <LinearLayout
+                android:id="@+id/employees_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="There are no employees in this department"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:gravity="center"
-                android:padding="16dp"
-                android:visibility="gone" /> <!-- Initially hidden -->
+                android:orientation="vertical"
+                android:layout_below="@+id/department_name">
 
-        </LinearLayout>
+                <!-- TextView to display when no employees are left -->
+                <TextView
+                    android:id="@+id/no_employees_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="There are no employees in this department"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
     </ScrollView>
 
     <!-- Bottom Menu -->
