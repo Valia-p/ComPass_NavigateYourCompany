@@ -32,12 +32,7 @@
             android:name=".signup_head_Activity"
             android:exported="true"
             android:label="signup_head_Activity"
-            android:theme="@style/Theme.ComPass_NavigateYourCompany">
-            <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter> -->
-        </activity>
+            android:theme="@style/Theme.ComPass_NavigateYourCompany"/>
         <activity android:name=".employee_profile_Activity"
             android:exported="true"
             android:label="employee_profile_Activity"
@@ -52,8 +47,13 @@
             android:theme="@style/Theme.ComPass_NavigateYourCompany" />
         <activity android:name=".login_Activity"
             android:exported="true"
-            android:label="login_Activity"
-            android:theme="@style/Theme.ComPass_NavigateYourCompany"/>
+            android:theme="@style/Theme.ComPass_NavigateYourCompany">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="select_type_Activity"
             android:exported="true"
             android:label="select_type_Activity"
@@ -85,15 +85,15 @@
 
 
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="true" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
     </application>
 
 </manifest>
