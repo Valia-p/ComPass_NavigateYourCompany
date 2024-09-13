@@ -185,7 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Information"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:paddingStart="8dp"
@@ -246,6 +246,26 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LeaveRequests"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingStart="8dp"
+                android:paddingTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/leave_requests_text"
+                android:text="accepted/declined/no/pending"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginTop="4dp"/>
         </LinearLayout>
 
     </ScrollView>
