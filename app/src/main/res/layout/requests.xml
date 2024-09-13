@@ -66,6 +66,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/requests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Requests"
+                android:textColor="@color/main_color"
+                android:textSize="32sp"
+                android:textStyle="bold"/>
+
             <!-- Container for dynamic requests -->
             <LinearLayout
                 android:id="@+id/requests_container"
@@ -79,7 +89,7 @@
                 android:id="@+id/no_requests_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No other requests"
+                android:text="No requests"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:gravity="center"

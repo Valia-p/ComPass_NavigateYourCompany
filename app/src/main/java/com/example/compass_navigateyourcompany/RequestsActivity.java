@@ -1,16 +1,20 @@
 package com.example.compass_navigateyourcompany;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -65,6 +69,7 @@ public class RequestsActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(this::logout);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void loadRequests() {
         Executors.newSingleThreadExecutor().execute(() -> {
             User headUser = db.userDao().findByLoginName(login_name);
@@ -117,31 +122,41 @@ public class RequestsActivity extends AppCompatActivity {
 
                             User user = filteredUsers.stream().filter(u -> u.getId() == pass.userID).findFirst().orElse(null);
 
+                            // Create a rounded corner background layout (this assumes you have a drawable for rounded corners)
+                            LinearLayout roundedLayout = new LinearLayout(this);
+                            LinearLayout.LayoutParams roundedLayoutParams = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            roundedLayout.setLayoutParams(roundedLayoutParams);
+                            roundedLayout.setOrientation(LinearLayout.VERTICAL);
+                            roundedLayout.setPadding(0, 10, 0, 10);
+                            roundedLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corners));
+                            roundedLayout.setElevation(4);
+
                             // Create and add views for the request...
                             TextView nameTextView = new TextView(RequestsActivity.this);
                             nameTextView.setText(user != null ? user.loginName : "Unknown");
                             nameTextView.setTextSize(23);
                             nameTextView.setTypeface(null, Typeface.BOLD);
-                            nameTextView.setTextColor(getResources().getColor(R.color.black));
-                            nameTextView.setPadding(15, 10, 0, 0);
+                            nameTextView.setTextColor(getResources().getColor(R.color.main_color));
+                            nameTextView.setPadding(15, 5, 8, 0);
 
                             TextView typeTextView = new TextView(RequestsActivity.this);
                             typeTextView.setText("Type: " + (pass.type != null ? pass.type : "N/A"));
                             typeTextView.setTextSize(18);
                             typeTextView.setTextColor(getResources().getColor(R.color.black));
-                            typeTextView.setPadding(15, 0, 0, 10);
+                            typeTextView.setPadding(20, 5, 0, 10);
 
                             TextView fromDateTextView = new TextView(RequestsActivity.this);
                             fromDateTextView.setText("From: " + (pass.fromDate != null ? dateFormat.format(pass.fromDate) : "N/A"));
                             fromDateTextView.setTextSize(18);
                             fromDateTextView.setTextColor(getResources().getColor(R.color.black));
-                            fromDateTextView.setPadding(30, 0, 0, 10);
+                            fromDateTextView.setPadding(20, 5, 0, 10);
 
                             TextView toDateTextView = new TextView(RequestsActivity.this);
                             toDateTextView.setText("To: " + (pass.toDate != null ? dateFormat.format(pass.toDate) : "N/A"));
                             toDateTextView.setTextSize(18);
                             toDateTextView.setTextColor(getResources().getColor(R.color.black));
-                            toDateTextView.setPadding(30, 0, 0, 10);
+                            toDateTextView.setPadding(20, 5, 0, 10);
 
                             long diffInMillis = pass.toDate.getTime() - pass.fromDate.getTime();
                             long diffInDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
@@ -149,27 +164,56 @@ public class RequestsActivity extends AppCompatActivity {
                             periodTextView.setText("Period: " + diffInDays + " days");
                             periodTextView.setTextSize(18);
                             periodTextView.setTextColor(getResources().getColor(R.color.black));
-                            periodTextView.setPadding(30, 0, 0, 10);
+                            periodTextView.setPadding(20, 5, 0, 10);
+
+                            // Add the Accept and Decline buttons
+                            LinearLayout buttonLayout = new LinearLayout(this);
+                            buttonLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                            buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            buttonLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
                             Button acceptButton = new Button(RequestsActivity.this);
                             acceptButton.setText("Accept");
+                            acceptButton.setTextColor(ContextCompat.getColorStateList(this, R.color.white));
+                            acceptButton.setMinWidth(100);
+                            acceptButton.setMinHeight(48);
+                            acceptButton.setPadding(10, 10, 10, 10);
+                            acceptButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.main_color));
+//                            acceptButton.setBackgroundResource(R.drawable.button_bg_corners);
                             acceptButton.setOnClickListener(v -> updatePassStatus(pass, 1));
 
                             Button declineButton = new Button(RequestsActivity.this);
                             declineButton.setText("Decline");
+                            declineButton.setTextColor(ContextCompat.getColorStateList(this, R.color.white));
+                            declineButton.setMinWidth(100);
+                            declineButton.setMinHeight(48);
+                            declineButton.setPadding(10, 10, 10, 10);
+                            declineButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.main_color));
+//                            declineButton.setBackgroundResource(R.drawable.button_bg_corners);
                             declineButton.setOnClickListener(v -> updatePassStatus(pass, -1));
+
+//                            // Add margin to the Decline button to create space between buttons
+//                            LinearLayout.LayoutParams declineParams = new LinearLayout.LayoutParams(
+//                                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                            declineParams.setMargins(16, 0, 0, 0); // This will add a margin of 16px (~5dp)
+//                            declineButton.setLayoutParams(declineParams);
+
+                            buttonLayout.addView(acceptButton);
+                            buttonLayout.addView(declineButton);
 
                             LinearLayout requestLayout = new LinearLayout(RequestsActivity.this);
                             requestLayout.setOrientation(LinearLayout.VERTICAL);
                             requestLayout.setPadding(16, 16, 16, 16);
 
-                            requestLayout.addView(nameTextView);
-                            requestLayout.addView(typeTextView);
-                            requestLayout.addView(fromDateTextView);
-                            requestLayout.addView(toDateTextView);
-                            requestLayout.addView(periodTextView);
-                            requestLayout.addView(acceptButton);
-                            requestLayout.addView(declineButton);
+                            roundedLayout.addView(nameTextView);
+                            roundedLayout.addView(typeTextView);
+                            roundedLayout.addView(fromDateTextView);
+                            roundedLayout.addView(toDateTextView);
+                            roundedLayout.addView(periodTextView);
+                            roundedLayout.addView(buttonLayout);
+
+                            requestLayout.addView(roundedLayout);
 
                             if ("Sick Leave".equals(pass.type) && pass.filePath != null && !pass.filePath.isEmpty()) {
                                 Button documentButton = new Button(RequestsActivity.this);
