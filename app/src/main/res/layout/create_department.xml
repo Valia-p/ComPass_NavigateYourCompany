@@ -73,6 +73,22 @@
                     android:backgroundTint="@color/main_color"/>
             </LinearLayout>
 
+            <ScrollView
+                android:id="@+id/department_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:id="@+id/department_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                </LinearLayout>
+            </ScrollView>
+
             <ListView
                 android:id="@+id/department_list"
                 android:layout_width="match_parent"
@@ -97,6 +113,5 @@
         android:minWidth="200dp"
         android:minHeight="48dp"
         android:backgroundTint="@color/main_color"/>
-
 
 </RelativeLayout>

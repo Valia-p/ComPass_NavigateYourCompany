@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,12 +18,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 
-
 public class home_employer_Activity extends AppCompatActivity {
 
     private LinearLayout userListContainer;
     private AppDatabase db;
     private String login_name;
+    private String authToken;
+    private Button addDepartmentButton; // Add this line
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,12 @@ public class home_employer_Activity extends AppCompatActivity {
         ImageView homeButton = findViewById(R.id.home_button);
         ImageView logoutButton = findViewById(R.id.logout_button);
         ImageView settingsButton = findViewById(R.id.settings_button);
+        addDepartmentButton = findViewById(R.id.add_department_button); // Initialize the button
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         db = AppDatabase.getInstance(this);
-
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -52,6 +54,15 @@ public class home_employer_Activity extends AppCompatActivity {
         profileButton.setOnClickListener(v -> navigateTo(employer_profile_Activity.class));
         homeButton.setOnClickListener(v -> navigateTo(home_employer_Activity.class));
         logoutButton.setOnClickListener(this::logout);
+
+        // Add OnClickListener for the Add Department button
+        addDepartmentButton.setOnClickListener(v -> {
+            Intent intentCreateDepartment = new Intent(home_employer_Activity.this, create_department_Activity.class);
+            intentCreateDepartment.putExtra("Name", login_name);
+            intentCreateDepartment.putExtra("authToken", authToken); // Ensure this is also passed
+            intentCreateDepartment.putExtra("sourceActivity", "homeEmployer");
+            startActivity(intentCreateDepartment);
+        });
     }
 
     private class LoadUsersTask extends AsyncTask<String, Void, List<Department>> {
@@ -59,6 +70,7 @@ public class home_employer_Activity extends AppCompatActivity {
         protected List<Department> doInBackground(String... params) {
             String loginName = params[0];
             User currentUser = db.userDao().findByLoginName(loginName);
+            authToken = currentUser.authToken;
             if (currentUser != null) {
                 String authToken = currentUser.authToken;
                 return db.departmentDao().findByCid(authToken);
@@ -182,6 +194,7 @@ public class home_employer_Activity extends AppCompatActivity {
     private void navigateTo(Class<?> activityClass) {
         Intent intent = new Intent(home_employer_Activity.this, activityClass);
         intent.putExtra("Name", login_name);
+        intent.putExtra("authToken", authToken);
         startActivity(intent);
         finish();
     }

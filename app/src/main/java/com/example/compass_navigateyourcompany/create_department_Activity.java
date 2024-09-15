@@ -2,11 +2,10 @@ package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +14,12 @@ import java.util.ArrayList;
 
 public class create_department_Activity extends AppCompatActivity {
     private EditText departmentNameEditText;
-    private ListView departmentListView;
+    private LinearLayout departmentContainer;
     private ArrayList<String> departmentList;
-    private ArrayAdapter<String> adapter;
     private AppDatabase db;
-    private String authToken; // hold the employer's authToken
+    private String authToken;
     private String name;
+    private String sourceActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,103 +28,111 @@ public class create_department_Activity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // Get the authToken passed from the previous activity
+        // Retrieve data from Intent
         Intent intent = getIntent();
-        authToken = intent.getStringExtra("authToken");
-        name = intent.getStringExtra("Name");
-
+        if (intent != null) {
+            name = intent.getStringExtra("Name");
+            authToken = intent.getStringExtra("authToken");
+            sourceActivity = intent.getStringExtra("sourceActivity"); // Get sourceActivity value
+        }
 
         Button addButton = findViewById(R.id.add_button);
         Button cancelButton = findViewById(R.id.cancel_button);
         Button submitButton = findViewById(R.id.submit_button);
         Button backButton = findViewById(R.id.back_button);
         departmentNameEditText = findViewById(R.id.department_name);
-        departmentListView = findViewById(R.id.department_list);
+        departmentContainer = findViewById(R.id.department_container);
 
         departmentList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, departmentList);
-        departmentListView.setAdapter(adapter);
 
         // Add button
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String departmentName = departmentNameEditText.getText().toString();
-                if (departmentName.isEmpty()) {
-                    Toast.makeText(create_department_Activity.this, "Please enter a department name", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Add the department name to the list
-                    departmentList.add(departmentName);
-                    adapter.notifyDataSetChanged();
-                    departmentNameEditText.setText("");
-                }
+        addButton.setOnClickListener(v -> {
+            String departmentName = departmentNameEditText.getText().toString();
+            if (departmentName.isEmpty()) {
+                Toast.makeText(create_department_Activity.this, "Please enter a department name", Toast.LENGTH_SHORT).show();
+            } else {
+                departmentList.add(departmentName);
+                addDepartmentToScrollView(departmentName);
+                departmentNameEditText.setText("");
             }
         });
 
         // Cancel button
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Clear the department name field
-                departmentNameEditText.setText("");
-                Toast.makeText(create_department_Activity.this, "Operation Cancelled", Toast.LENGTH_SHORT).show();
-            }
+        cancelButton.setOnClickListener(v -> {
+            departmentNameEditText.setText("");
+            Toast.makeText(create_department_Activity.this, "Operation Cancelled", Toast.LENGTH_SHORT).show();
         });
 
         // Submit button
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (departmentList.isEmpty()) {
-                    Toast.makeText(create_department_Activity.this, "No departments to submit", Toast.LENGTH_SHORT).show();
-                } else {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                String cid = authToken;
-
-                                // Insert each department into the database
-                                for (String departmentName : departmentList) {
-                                    Department department = new Department();
-                                    department.Name = departmentName;
-                                    department.Cid = cid;
-                                    db.departmentDao().insert(department);
-                                }
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(create_department_Activity.this, "Departments successfully added", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(create_department_Activity.this, home_employer_Activity.class);
-                                        intent.putExtra("Name", name);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(create_department_Activity.this, "An error occurred while adding departments", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
+        submitButton.setOnClickListener(v -> {
+            if (departmentList.isEmpty()) {
+                Toast.makeText(create_department_Activity.this, "No departments to submit", Toast.LENGTH_SHORT).show();
+            } else {
+                new Thread(() -> {
+                    try {
+                        String cid = authToken;
+                        for (String departmentName : departmentList) {
+                            Department department = new Department();
+                            department.Name = departmentName;
+                            department.Cid = cid;
+                            db.departmentDao().insert(department);
                         }
-                    }).start();
-                }
+
+                        runOnUiThread(() -> {
+                            Toast.makeText(create_department_Activity.this, "Departments successfully added", Toast.LENGTH_SHORT).show();
+                            Intent homeIntent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+                            homeIntent.putExtra("Name", name);
+                            startActivity(homeIntent);
+                            finish();
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> Toast.makeText(create_department_Activity.this, "An error occurred while adding departments", Toast.LENGTH_SHORT).show());
+                    }
+                }).start();
             }
         });
 
         // Back button
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(create_department_Activity.this, signup_employer_Activity.class);
-                startActivity(intent);
-                finish();
+        backButton.setOnClickListener(v -> {
+            Intent backIntent;
+            if ("homeEmployer".equals(sourceActivity)) {
+                backIntent = new Intent(create_department_Activity.this, home_employer_Activity.class);
+            } else {
+                backIntent = new Intent(create_department_Activity.this, signup_employer_Activity.class);
             }
+            backIntent.putExtra("Name", name); // Pass the name if needed
+            startActivity(backIntent);
+            finish();
         });
+    }
+
+    private void addDepartmentToScrollView(final String departmentName) {
+        LinearLayout departmentEntryLayout = new LinearLayout(this);
+        departmentEntryLayout.setOrientation(LinearLayout.HORIZONTAL);
+        departmentEntryLayout.setPadding(0, 10, 0, 10);
+
+        TextView departmentTextView = new TextView(this);
+        departmentTextView.setText(departmentName);
+        departmentTextView.setTextSize(18);
+        departmentTextView.setPadding(0, 10, 10, 10);
+        departmentTextView.setTextColor(getResources().getColor(R.color.main_color));
+
+        Button deleteButton = new Button(this);
+        deleteButton.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        deleteButton.setBackgroundResource(R.drawable.bin); // Use your bin icon drawable
+        deleteButton.setPadding(16, 16, 16, 16);
+        deleteButton.setOnClickListener(v -> {
+            departmentList.remove(departmentName);
+            departmentContainer.removeView(departmentEntryLayout);
+        });
+
+        departmentEntryLayout.addView(departmentTextView);
+        departmentEntryLayout.addView(deleteButton);
+
+        departmentContainer.addView(departmentEntryLayout);
     }
 }
