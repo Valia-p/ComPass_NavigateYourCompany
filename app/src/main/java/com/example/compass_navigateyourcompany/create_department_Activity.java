@@ -48,8 +48,11 @@ public class create_department_Activity extends AppCompatActivity {
         // Add button
         addButton.setOnClickListener(v -> {
             String departmentName = departmentNameEditText.getText().toString();
+
             if (departmentName.isEmpty()) {
                 Toast.makeText(create_department_Activity.this, "Please enter a department name", Toast.LENGTH_SHORT).show();
+            } else if (departmentList.contains(departmentName)) {
+                Toast.makeText(create_department_Activity.this, "Department already added", Toast.LENGTH_SHORT).show();
             } else {
                 departmentList.add(departmentName);
                 addDepartmentToScrollView(departmentName);
