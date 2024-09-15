@@ -246,26 +246,50 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/LeaveRequests"
-                android:textSize="23sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:paddingStart="8dp"
-                android:paddingTop="15dp"/>
+                android:orientation="vertical"
+                android:layout_below="@id/calendar_view"
+                android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/leave_requests_text"
-                android:text="accepted/declined/no/pending"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/LeaveRequests"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:paddingStart="8dp"
+                    android:paddingTop="20dp"/>
+
+                <!-- Smaller scrollable area for dynamic requests -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:id="@+id/requests_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <!-- TextView to display when no requests are left -->
+                <TextView
+                    android:id="@+id/no_requests_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="There are no leave requests"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
