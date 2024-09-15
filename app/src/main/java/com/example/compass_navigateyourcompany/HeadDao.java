@@ -15,7 +15,7 @@ public interface HeadDao {
     List<Head> getAllHeads();
 
     @Query("SELECT * FROM Head WHERE Did = :departmentId")
-    List<Head> getHeadsByDepartmentId(int departmentId);
+    Head getHeadByDepartmentId(int departmentId);
 
     @Query("SELECT * FROM Head WHERE name = :name LIMIT 1")
     Head getHeadByName(String name);

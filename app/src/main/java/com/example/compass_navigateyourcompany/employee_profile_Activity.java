@@ -56,7 +56,6 @@ public class employee_profile_Activity extends AppCompatActivity {
         ImageView homeButton = findViewById(R.id.home_button);
         ImageView logoutButton = findViewById(R.id.logout_button);
 
-        // Get user login name from Intent
         Intent intent = getIntent();
         if (intent != null) {
             loginName = intent.getStringExtra("loginName");
