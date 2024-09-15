@@ -42,6 +42,7 @@ public class home_head_Activity extends AppCompatActivity{
 
         profileButton.setOnClickListener(v -> {
             Intent intentProfile = new Intent(home_head_Activity.this, head_profile_Activity.class);
+            intentProfile.putExtra("sourceActivity", "home_head");
             intentProfile.putExtra("loginName", login_name);
             startActivity(intentProfile);
             finish();
@@ -74,6 +75,13 @@ public class home_head_Activity extends AppCompatActivity{
 
         employeesButton.setOnClickListener(v -> {
             Intent intentRequests = new Intent(home_head_Activity.this, department_employees_Activity.class);
+            intentRequests.putExtra("Name",login_name);
+            startActivity(intentRequests);
+            finish();
+        });
+
+        onLeaveButton.setOnClickListener(v -> {
+            Intent intentRequests = new Intent(home_head_Activity.this, employees_onLeave_Activity.class);
             intentRequests.putExtra("Name",login_name);
             startActivity(intentRequests);
             finish();

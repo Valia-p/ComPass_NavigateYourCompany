@@ -120,6 +120,7 @@ public class department_employees_Activity extends AppCompatActivity {
 
     private void navigateTo(Class<?> activityClass) {
         Intent intent = new Intent(department_employees_Activity.this, activityClass);
+        intent.putExtra("sourceActivity", "department_employees");
         intent.putExtra("loginName", login_name);
         intent.putExtra("Name", login_name);
         startActivity(intent);

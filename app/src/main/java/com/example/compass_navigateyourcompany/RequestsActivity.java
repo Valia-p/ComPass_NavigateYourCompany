@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -115,9 +116,10 @@ public class RequestsActivity extends AppCompatActivity {
                     boolean hasRequests = false;
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    Date currentDate = new Date();
 
                     for (Pass pass : passes) {
-                        if (pass.approved == 0) {
+                        if (pass.approved == 0 && (pass.fromDate.after(currentDate) || pass.fromDate.equals(currentDate) )) {
                             hasRequests = true;
 
                             User user = filteredUsers.stream().filter(u -> u.getId() == pass.userID).findFirst().orElse(null);
@@ -249,6 +251,7 @@ public class RequestsActivity extends AppCompatActivity {
 
     private void navigateTo(Class<?> activityClass) {
         Intent intent = new Intent(RequestsActivity.this, activityClass);
+        intent.putExtra("sourceActivity", "RequestsActivity");
         intent.putExtra("loginName", login_name);
         intent.putExtra("Name", login_name);
         startActivity(intent);

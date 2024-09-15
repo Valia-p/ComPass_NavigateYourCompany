@@ -29,4 +29,8 @@ public class Head {
 
     @ColumnInfo(name = "FilePath")
     public String filePath;
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
 }

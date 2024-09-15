@@ -34,6 +34,10 @@ public class Employee {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String toString() {
         return "Employee{id=" + id + ", name='" + name + "', authToken='" + authToken + "'}";
     }

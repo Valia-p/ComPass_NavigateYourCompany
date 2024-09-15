@@ -271,6 +271,12 @@ public class home_employee_Activity extends AppCompatActivity {
                         throw new Exception("Invalid date format");
                     }
 
+                    Date currentDate = new Date();
+                    if (fromDate.before(currentDate)) {
+                        runOnUiThread(() -> Toast.makeText(home_employee_Activity.this, "From date cannot be before the current date", Toast.LENGTH_SHORT).show());
+                        return;
+                    }
+
                     if (fromDate.after(toDate)) {
                         runOnUiThread(() -> Toast.makeText(home_employee_Activity.this, "From date must be before To date", Toast.LENGTH_SHORT).show());
                         return;

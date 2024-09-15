@@ -21,4 +21,7 @@ public interface PassDao {
     @Query("SELECT * FROM pass WHERE Uid IN (:userIds) AND approved = 0")
     List<Pass> getPassesByUserIds(List<Integer> userIds);
 
+    @Query("SELECT * FROM pass WHERE Uid = :userId AND approved = 1")
+    List<Pass> getApprovedPassesByUserId(int userId);
+
 }

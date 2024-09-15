@@ -23,4 +23,7 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE auth_token = :authToken AND type = 'Employee'")
     List<User> findEmployeeUsersByAuthToken(String authToken);
 
+    @Query("SELECT id FROM User WHERE login_name = :loginName LIMIT 1")
+    Integer findIdByName(String loginName);
+
 }
