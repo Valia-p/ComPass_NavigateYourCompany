@@ -6,12 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -186,14 +188,25 @@ public class employee_profile_Activity extends AppCompatActivity {
                 requestTextView.setTextSize(16);
                 requestTextView.setPadding(8, 8, 8, 8);
 
-                requestTextView.setBackgroundColor(getResources().getColor(android.R.color.white));
                 requestTextView.setTextColor(getResources().getColor(android.R.color.black));
 
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) requestTextView.getLayoutParams();
-                layoutParams.setMargins(0, 0, 0, 8);
+                layoutParams.setMargins(5, 5, 5, 8);
                 requestTextView.setLayoutParams(layoutParams);
 
-                requestsContainer.addView(requestTextView);
+                LinearLayout roundedLayout = new LinearLayout(this);
+                LinearLayout.LayoutParams roundedLayoutParams = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                roundedLayoutParams.setMargins(0, 0, 0, 8);
+                roundedLayout.setLayoutParams(roundedLayoutParams);
+                roundedLayout.setOrientation(LinearLayout.VERTICAL);
+                roundedLayout.setPadding(0, 10, 0, 10);
+                roundedLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corners));
+                roundedLayout.setElevation(4);
+
+                roundedLayout.addView(requestTextView);
+
+                requestsContainer.addView(roundedLayout);
             }
         }
     }
