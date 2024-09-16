@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public interface UserDao {
     @Insert
     void insert(User user);
+
+    @Update
+    void updateUser(User user);
 
     @Query("SELECT * FROM User WHERE login_name = :loginName AND password = :password AND auth_token = :authToken")
     User getUser(String loginName, String password, String authToken);

@@ -3,6 +3,8 @@ package com.example.compass_navigateyourcompany;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
+
 import java.util.List;
 
 @Dao
@@ -10,6 +12,9 @@ public interface HeadDao {
 
     @Insert
     long insert(Head head);
+
+    @Update
+    void updateHead(Head head);
 
     @Query("SELECT * FROM Head")
     List<Head> getAllHeads();

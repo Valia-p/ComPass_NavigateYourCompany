@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +20,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -75,7 +78,41 @@ public class home_employee_Activity extends AppCompatActivity {
 
         }
 
-        settingsButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
+        settingsButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int id = item.getItemId();
+
+                if (id == R.id.nav_settings) {
+
+                    Intent intentSettings = new Intent(home_employee_Activity.this, settings_Activity.class);
+                    intentSettings.putExtra("Name", login_name);
+                    intentSettings.putExtra("sourceActivity", "home_employee");
+                    startActivity(intentSettings);
+                } else if (id == R.id.nav_profile) {
+                    Intent intentProfile = new Intent(home_employee_Activity.this, employee_profile_Activity.class);
+                    intentProfile.putExtra("sourceActivity", "home_employee");
+                    intentProfile.putExtra("loginName", login_name);
+                    startActivity(intentProfile);
+                    finish();
+                } else if (id == R.id.nav_logout) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear(); // Clear all data
+                    editor.apply();
+
+                    Intent intentLogin = new Intent(home_employee_Activity.this, login_Activity.class);
+                    startActivity(intentLogin);
+                    finish();
+                }
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
         profileButton.setOnClickListener(v -> {
             String loginName = login_name;

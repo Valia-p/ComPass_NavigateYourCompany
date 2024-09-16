@@ -119,12 +119,12 @@ public class RequestsActivity extends AppCompatActivity {
                     Date currentDate = new Date();
 
                     for (Pass pass : passes) {
-                        if (pass.approved == 0 && (pass.fromDate.after(currentDate) || pass.fromDate.equals(currentDate) )) {
+                        if (pass.approved == 0 && (pass.fromDate.after(currentDate) || pass.fromDate.equals(currentDate))) {
                             hasRequests = true;
 
                             User user = filteredUsers.stream().filter(u -> u.getId() == pass.userID).findFirst().orElse(null);
 
-                            // Create a rounded corner background layout (this assumes you have a drawable for rounded corners)
+                            // Create a rounded corner background layout
                             LinearLayout roundedLayout = new LinearLayout(this);
                             LinearLayout.LayoutParams roundedLayoutParams = new LinearLayout.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -209,7 +209,9 @@ public class RequestsActivity extends AppCompatActivity {
 
                             requestLayout.addView(roundedLayout);
 
+                            // Check if the pass is a sick leave and if a file path exists
                             if ("Sick Leave".equals(pass.type) && pass.filePath != null && !pass.filePath.isEmpty()) {
+                                // Create a Download Document button
                                 Button documentButton = new Button(RequestsActivity.this);
                                 documentButton.setText("Download Document");
                                 documentButton.setOnClickListener(v -> {

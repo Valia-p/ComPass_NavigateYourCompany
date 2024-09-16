@@ -38,22 +38,27 @@ public class head_profile_Activity extends AppCompatActivity {
         findViewById(R.id.back_button).setOnClickListener(v -> {
             if ("employees_onLeave".equals(sourceActivity)) {
                 Intent intent = new Intent(head_profile_Activity.this, employees_onLeave_Activity.class);
-                intent.putExtra("Name", getIntent().getStringExtra("Name"));
+                intent.putExtra("Name", loginName);
                 startActivity(intent);
             }
             else if ("home_head".equals(sourceActivity)) {
                 Intent intent = new Intent(head_profile_Activity.this, home_head_Activity.class);
-                intent.putExtra("Name", getIntent().getStringExtra("Name"));
+                intent.putExtra("Name", loginName);
                 startActivity(intent);
             }
             else if ("RequestsActivity".equals(sourceActivity)) {
                 Intent intent = new Intent(head_profile_Activity.this, RequestsActivity.class);
-                intent.putExtra("Name", getIntent().getStringExtra("Name"));
+                intent.putExtra("Name", loginName);
                 startActivity(intent);
             }
             else if ("department_employees".equals(sourceActivity)) {
                 Intent intent = new Intent(head_profile_Activity.this, department_employees_Activity.class);
-                intent.putExtra("Name", getIntent().getStringExtra("Name"));
+                intent.putExtra("Name", loginName);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(head_profile_Activity.this, settings_Activity.class);
+                intent.putExtra("Name", loginName);
                 startActivity(intent);
             }
 
