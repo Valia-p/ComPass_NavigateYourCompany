@@ -2,6 +2,7 @@ package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -114,11 +116,17 @@ public class create_department_Activity extends AppCompatActivity {
         LinearLayout departmentEntryLayout = new LinearLayout(this);
         departmentEntryLayout.setOrientation(LinearLayout.HORIZONTAL);
         departmentEntryLayout.setPadding(0, 10, 0, 10);
+        departmentEntryLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corners));
+        departmentEntryLayout.setElevation(4);
+        LinearLayout.LayoutParams departmentLayoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        departmentLayoutParams.setMargins(0, 0, 0, 8);
+        departmentEntryLayout.setLayoutParams(departmentLayoutParams);
 
         TextView departmentTextView = new TextView(this);
-        departmentTextView.setText(departmentName);
+        departmentTextView.setText("- " + departmentName);
         departmentTextView.setTextSize(18);
-        departmentTextView.setPadding(0, 10, 10, 10);
+        departmentTextView.setPadding(10, 10, 10, 10);
         departmentTextView.setTextColor(getResources().getColor(R.color.main_color));
 
         Button deleteButton = new Button(this);

@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -89,6 +90,10 @@ public class home_employer_Activity extends AppCompatActivity {
                     departmentLayout.setOrientation(LinearLayout.VERTICAL);
                     departmentLayout.setPadding(16, 16, 16, 16);
                     departmentLayout.setBackgroundResource(R.drawable.rounded_corners);
+                    LinearLayout.LayoutParams departmentLayoutParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    departmentLayoutParams.setMargins(0, 0, 0, 16);
+                    departmentLayout.setLayoutParams(departmentLayoutParams);
 
                     // Create and configure department TextView
                     TextView departmentTextView = new TextView(home_employer_Activity.this);
