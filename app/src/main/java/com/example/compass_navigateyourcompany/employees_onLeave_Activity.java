@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -100,22 +102,27 @@ public class employees_onLeave_Activity extends AppCompatActivity {
 
             // Add each pass to the container
             for (String request : requestsList) {
+                LinearLayout leavesLayout = new LinearLayout(this);
+                leavesLayout.setOrientation(LinearLayout.HORIZONTAL);
+                leavesLayout.setPadding(16, 12, 16, 12);
+                leavesLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corners));
+                leavesLayout.setElevation(4);
+                LinearLayout.LayoutParams leavesLayoutParams = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                leavesLayoutParams.setMargins(0, 0, 0, 12);
+                leavesLayout.setLayoutParams(leavesLayoutParams);
+
                 TextView requestTextView = new TextView(this);
                 requestTextView.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
                 requestTextView.setText(request);
                 requestTextView.setTextSize(16);
-                requestTextView.setPadding(8, 8, 8, 8);
-
-                requestTextView.setBackgroundColor(getResources().getColor(android.R.color.white));
+                requestTextView.setPadding(25, 0, 25, 0);
                 requestTextView.setTextColor(getResources().getColor(android.R.color.black));
 
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) requestTextView.getLayoutParams();
-                layoutParams.setMargins(0, 0, 0, 8);
-                requestTextView.setLayoutParams(layoutParams);
-
-                requestsContainer.addView(requestTextView);
+                leavesLayout.addView(requestTextView);
+                requestsContainer.addView(leavesLayout);
             }
         }
     }

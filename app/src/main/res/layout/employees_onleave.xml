@@ -84,8 +84,9 @@
                         android:id="@+id/requests"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="10dp"
                         android:text="Day Off"
+                        android:textAlignment="center"
                         android:textColor="@color/main_color"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
