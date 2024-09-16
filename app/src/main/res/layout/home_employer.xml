@@ -58,36 +58,40 @@
                 android:layout_marginTop="59dp" />
         </RelativeLayout>
 
-        <!-- Add Department Button -->
-        <Button
-            android:id="@+id/add_department_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Department"
-            android:textSize="18sp"
-            android:layout_below="@id/topMenu"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/main_color"
-            android:textColor="@android:color/white"
-            android:padding="10dp"
-            android:minWidth="200dp" />
-
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_above="@id/bottomMenu"
-            android:layout_below="@id/add_department_button"
+            android:layout_below="@id/topMenu"
             android:padding="16dp">
 
-            <!--contains department name, head and employees-->
             <LinearLayout
-                android:id="@+id/employee_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp" />
+                android:orientation="vertical">
+                <!--contains department name, head and employees-->
+                <LinearLayout
+                    android:id="@+id/employee_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp" />
+
+                <!-- Add Department Button -->
+                <Button
+                    android:id="@+id/add_department_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Department"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/main_color"
+                    android:textColor="@android:color/white"
+                    android:minWidth="200dp" />
+            </LinearLayout>
+
         </ScrollView>
 
         <!-- Bottom Menu Layout -->

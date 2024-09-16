@@ -95,7 +95,7 @@ public class home_employer_Activity extends AppCompatActivity {
                     departmentTextView.setText(department.getName());
                     departmentTextView.setTextSize(24);
                     departmentTextView.setTypeface(null, Typeface.BOLD);
-                    departmentTextView.setTextColor(getResources().getColor(R.color.bg_color));
+                    departmentTextView.setTextColor(getResources().getColor(R.color.black));
                     departmentTextView.setPadding(0, 0, 0, 8);
 
                     // Add department TextView to department layout
@@ -138,7 +138,7 @@ public class home_employer_Activity extends AppCompatActivity {
                 headTextView.setText("Head: " + head.name);
                 headTextView.setTextSize(20);
                 headTextView.setTypeface(null, Typeface.BOLD);
-                headTextView.setTextColor(getResources().getColor(R.color.bg_color));
+                headTextView.setTextColor(getResources().getColor(R.color.black));
                 headTextView.setPadding(0, 0, 0, 8);
 
                 // Add head TextView to head layout
@@ -178,7 +178,7 @@ public class home_employer_Activity extends AppCompatActivity {
                     TextView employeeTextView = new TextView(home_employer_Activity.this);
                     employeeTextView.setText(" - " + employee.name);
                     employeeTextView.setTextSize(18);
-                    employeeTextView.setTextColor(getResources().getColor(R.color.bg_color));
+                    employeeTextView.setTextColor(getResources().getColor(R.color.black));
                     employeeTextView.setPadding(0, 0, 0, 8);
 
                     // Add employee TextView to employees layout
