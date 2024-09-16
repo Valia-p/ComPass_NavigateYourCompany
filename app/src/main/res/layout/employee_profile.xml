@@ -266,7 +266,8 @@
                 <!-- Smaller scrollable area for dynamic requests -->
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp">
 
                     <LinearLayout
                         android:id="@+id/requests_container"
