@@ -38,49 +38,22 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/oldusername"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Old Username"
+                android:hint="Username"
                 android:inputType="textPersonName"
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/newusername"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="New Username"
-                android:inputType="textPersonName"
-                android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/oldpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Old Password"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/newpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="New Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:layout_marginTop="8dp"/>
-
-            <EditText
-                android:id="@+id/confirnewmpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Confirm New Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:layout_marginTop="8dp"/>
 
             <EditText
                 android:id="@+id/email"
@@ -88,16 +61,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="E-mail"
-                android:inputType="textEmailAddress"
-                android:padding="10dp" />
-
-
-            <EditText
-                android:id="@+id/newemail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="New E-mail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
@@ -111,19 +74,10 @@
                 android:layout_marginTop="8dp"/>
 
             <EditText
-                android:id="@+id/newphone"
+                android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="New Phone"
-                android:inputType="phone"
-                android:padding="10dp"
-                android:layout_marginTop="8dp"/>
-
-            <EditText
-                android:id="@+id/Changeyear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Change Year"
+                android:hint="Year"
                 android:inputType="number"
                 android:padding="10dp"
                 android:layout_marginTop="8dp"/>
@@ -134,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:padding="10dp"
-                android:text="Confirm"
+                android:text="Confirm Changes"
                 android:backgroundTint="@color/main_color"/>
 
         </LinearLayout>
