@@ -148,6 +148,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:text="Department *"
+                android:textColor="@color/black"
                 android:textSize="17sp" />
 
             <Spinner
