@@ -1,11 +1,15 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,13 +117,12 @@ public class create_department_Activity extends AppCompatActivity {
     }
 
     private void addDepartmentToScrollView(final String departmentName) {
-        LinearLayout departmentEntryLayout = new LinearLayout(this);
-        departmentEntryLayout.setOrientation(LinearLayout.HORIZONTAL);
-        departmentEntryLayout.setPadding(0, 10, 0, 10);
+        RelativeLayout departmentEntryLayout = new RelativeLayout(this);
         departmentEntryLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corners));
         departmentEntryLayout.setElevation(4);
-        LinearLayout.LayoutParams departmentLayoutParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams departmentLayoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
         departmentLayoutParams.setMargins(0, 0, 0, 8);
         departmentEntryLayout.setLayoutParams(departmentLayoutParams);
 
@@ -128,14 +131,26 @@ public class create_department_Activity extends AppCompatActivity {
         departmentTextView.setTextSize(18);
         departmentTextView.setPadding(10, 10, 10, 10);
         departmentTextView.setTextColor(getResources().getColor(R.color.main_color));
+        RelativeLayout.LayoutParams textViewParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        textViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        textViewParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        departmentTextView.setLayoutParams(textViewParams);
 
-        Button deleteButton = new Button(this);
-        deleteButton.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        deleteButton.setBackgroundResource(R.drawable.bin); // Use your bin icon drawable
+        ImageButton deleteButton = new ImageButton(this);
+        deleteButton.setImageResource(R.drawable.bin); // Use your bin icon drawable
+        deleteButton.setBackground(null);
         deleteButton.setPadding(16, 16, 16, 16);
+        deleteButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        buttonParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        buttonParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        deleteButton.setLayoutParams(buttonParams);
         deleteButton.setOnClickListener(v -> {
             departmentList.remove(departmentName);
             departmentContainer.removeView(departmentEntryLayout);
