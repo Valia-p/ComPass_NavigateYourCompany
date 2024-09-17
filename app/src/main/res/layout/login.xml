@@ -107,6 +107,7 @@
                 android:backgroundTint="@color/main_color"
                 android:text="LOGIN"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@id/textUsername"
                 app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="@id/textUsername"

@@ -23,6 +23,7 @@
                 android:layout_gravity="start"
                 android:layout_marginBottom="16dp"
                 android:text="Back"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/main_color"/>
 
             <TextView
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="Username"
+                android:textColor="@color/main_color"
                 android:inputType="textPersonName"
                 android:padding="10dp" />
 
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="Password"
+                android:textColor="@color/main_color"
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
@@ -60,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="E-mail"
+                android:textColor="@color/main_color"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
@@ -68,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone"
+                android:textColor="@color/main_color"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:layout_marginTop="8dp"/>
@@ -76,7 +81,8 @@
                 android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Year"
+                android:hint="Years of service"
+                android:textColor="@color/main_color"
                 android:inputType="number"
                 android:padding="10dp"
                 android:layout_marginTop="8dp"/>
@@ -88,6 +94,7 @@
                 android:layout_marginTop="16dp"
                 android:padding="10dp"
                 android:text="Confirm Changes"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/main_color"/>
 
         </LinearLayout>
@@ -126,6 +133,7 @@
                 android:layout_marginTop="16dp"
                 android:padding="10dp"
                 android:text="Submit Department"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/main_color"/>
 
         </LinearLayout>

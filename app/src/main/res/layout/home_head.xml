@@ -73,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="Leave Requests"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:backgroundTint="@color/main_color"/>
 
@@ -84,6 +85,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_centerHorizontal="true"
                     android:text="Employees on Leave"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:backgroundTint="@color/main_color"/>
 
@@ -95,6 +97,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_centerHorizontal="true"
                     android:text="Employees"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:backgroundTint="@color/main_color"/>
 
