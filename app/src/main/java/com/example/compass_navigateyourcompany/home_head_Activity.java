@@ -78,8 +78,8 @@ public class home_head_Activity extends AppCompatActivity{
 
         profileButton.setOnClickListener(v -> {
             Intent intentProfile = new Intent(home_head_Activity.this, head_profile_Activity.class);
-            intentProfile.putExtra("sourceActivity", "home_head");
             intentProfile.putExtra("loginName", login_name);
+            intentProfile.putExtra("sourceActivity", "home_head");
             startActivity(intentProfile);
             finish();
         });

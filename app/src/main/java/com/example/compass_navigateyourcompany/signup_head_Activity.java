@@ -143,7 +143,9 @@ public class signup_head_Activity extends AppCompatActivity {
                                         runOnUiThread(() -> {
                                             Toast.makeText(signup_head_Activity.this, "Sign-Up Successful", Toast.LENGTH_SHORT).show();
                                             clearForm();
-                                            startActivity(new Intent(signup_head_Activity.this, home_head_Activity.class));
+                                            Intent intent = new Intent(signup_head_Activity.this, home_head_Activity.class);
+                                            intent.putExtra("Name", name);
+                                            startActivity(intent);
                                             finish();
                                         });
                                     } else {
