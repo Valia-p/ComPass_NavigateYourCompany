@@ -77,9 +77,6 @@ public class login_Activity extends AppCompatActivity {
             String password = params[1];
             String token = params[2];
 
-            Log.d("LoginTest", "Attempting to login with: " + username + " / " + password + " / " + token);
-
-
             User user = db.userDao().getUser(username, password, token);
             Log.d("LoginTest", "User retrieved: " + (user != null ? user.loginName : "null"));
 

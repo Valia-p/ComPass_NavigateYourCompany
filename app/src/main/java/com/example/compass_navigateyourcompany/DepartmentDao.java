@@ -11,9 +11,6 @@ public interface DepartmentDao {
     @Insert
     void insert(Department department);
 
-    @Query("SELECT * FROM Department")
-    List<Department> getAllDepartments();
-
     @Query("SELECT * FROM Department WHERE Name = :name")
     Department findByName(String name);
 

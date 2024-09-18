@@ -16,9 +16,6 @@ public interface HeadDao {
     @Update
     void updateHead(Head head);
 
-    @Query("SELECT * FROM Head")
-    List<Head> getAllHeads();
-
     @Query("SELECT * FROM Head WHERE Did = :departmentId")
     Head getHeadByDepartmentId(int departmentId);
 
