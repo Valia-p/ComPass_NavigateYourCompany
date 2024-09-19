@@ -1,8 +1,12 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +45,11 @@ public class login_Activity extends AppCompatActivity {
                 String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String token = editTextToken.getText().toString();
+
+                // Highlight required fields
+                highlightRequiredFields(editTextPassword);
+                highlightRequiredFields(editTextToken);
+                highlightRequiredFields(editTextUsername);
 
                 if (validateInputs(username, password, token)) {
                     new LoginTask().execute(username, password, token);
@@ -117,5 +126,21 @@ public class login_Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
 
+    }
+
+    private void highlightRequiredFields(TextView textView) {
+        if (textView == null) return;
+
+        CharSequence hint = textView.getHint();
+        if (hint == null) return;
+
+        String hintString = hint.toString();
+        SpannableString spannableString = new SpannableString(hintString);
+        ForegroundColorSpan redColorSpan = new ForegroundColorSpan(Color.RED);
+        int asteriskPosition = hintString.indexOf("*");
+        if (asteriskPosition != -1) {
+            spannableString.setSpan(redColorSpan, asteriskPosition, asteriskPosition + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        textView.setHint(spannableString);
     }
 }

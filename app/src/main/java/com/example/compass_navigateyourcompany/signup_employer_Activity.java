@@ -1,10 +1,15 @@
 package com.example.compass_navigateyourcompany;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +45,15 @@ public class signup_employer_Activity extends AppCompatActivity {
                 EditText authTokenEditText = findViewById(R.id.auth_token);
                 EditText addressEditText = findViewById(R.id.address);
                 EditText phoneEditText = findViewById(R.id.phone);
+
+                // Highlight required fields
+                highlightRequiredFields(nameEditText);
+                highlightRequiredFields(passwordEditText);
+                highlightRequiredFields(emailEditText);
+                highlightRequiredFields(phoneEditText);
+                highlightRequiredFields(authTokenEditText);
+                highlightRequiredFields(addressEditText);
+                highlightRequiredFields(companyEditText);
 
                 String name = nameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
@@ -123,5 +137,21 @@ public class signup_employer_Activity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void highlightRequiredFields(TextView textView) {
+        if (textView == null) return;
+
+        CharSequence hint = textView.getHint();
+        if (hint == null) return;
+
+        String hintString = hint.toString();
+        SpannableString spannableString = new SpannableString(hintString);
+        ForegroundColorSpan redColorSpan = new ForegroundColorSpan(Color.RED);
+        int asteriskPosition = hintString.indexOf("*");
+        if (asteriskPosition != -1) {
+            spannableString.setSpan(redColorSpan, asteriskPosition, asteriskPosition + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        textView.setHint(spannableString);
     }
 }
